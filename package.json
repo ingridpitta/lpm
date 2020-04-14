@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "hbs": "^4.1.0",
+    "materialize-css": "^1.0.0-rc.2",
     "mongoose": "^5.9.4",
     "mongoose-findorcreate": "^3.0.0",
     "node-sass": "^4.13.1",
