@@ -16,15 +16,15 @@ _dotenv["default"].config();
 
 var app = (0, _express["default"])(); //Middlewares
 
-app.set("views", _path["default"].join(__dirname, "views"));
-app.set("view engine", "hbs");
-app.use("/style", (0, _nodeSassMiddleware["default"])({
+app.use("/styles", (0, _nodeSassMiddleware["default"])({
   src: __dirname + "/sass",
-  dest: _path["default"].join(__dirname, "public"),
+  dest: _path["default"].join(__dirname, "public", "styles"),
   debug: true,
   outputStyle: "compressed"
 }));
-app.use("/public", _express["default"]["static"](_path["default"].join(__dirname, "public")));
+app.use(_express["default"]["static"](_path["default"].join(__dirname, "public")));
+app.set("views", _path["default"].join(__dirname, "views"));
+app.set("view engine", "hbs");
 app.use("/", _publicRoutes["default"]);
 app.listen(process.env.PORT, function () {
   return console.log("Running in PORT ".concat(process.env.PORT));
