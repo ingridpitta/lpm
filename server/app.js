@@ -9,19 +9,19 @@ dotenv.config()
 const app = express();
 
 //Middlewares
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
 app.use(
-  "/style",  
+  "/styles",  
   sassMiddleware({
     src: __dirname + "/sass",
-    dest: path.join(__dirname, "public"),
+    dest: path.join(__dirname, "public", "styles"),
     debug: true,
     outputStyle: "compressed",
   })
 );
-
-app.use("/public", express.static(path.join(__dirname, "public")));
+  
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
 
 app.use("/", publicRoutes);
 
