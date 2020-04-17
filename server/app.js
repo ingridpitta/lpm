@@ -91,7 +91,6 @@ passport.use(
       callbackURL: `${process.env.HOST_URL}/auth/facebook/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
-      console.log({ profile });
       const { id, displayName } = profile;
       User.findOrCreate(
         { facebookId: id },
