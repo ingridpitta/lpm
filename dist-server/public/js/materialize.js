@@ -1,6 +1,8 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
 
 /*!
  * Materialize v1.0.0 (http://materializecss.com)
@@ -55,12 +57,12 @@ function _possibleConstructorReturn(self, call) {
     throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
   }
 
-  return call && (_typeof(call) === "object" || typeof call === "function") ? call : self;
+  return call && ((0, _typeof2["default"])(call) === "object" || typeof call === "function") ? call : self;
 }
 
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + _typeof(superClass));
+    throw new TypeError("Super expression must either be null or a function, not " + (0, _typeof2["default"])(superClass));
   }
 
   subClass.prototype = Object.create(superClass && superClass.prototype, {
@@ -95,10 +97,10 @@ function _classCallCheck(instance, Constructor) {
   var noop = function noop() {},
       isFunction = function isFunction(item) {
     // @see https://crbug.com/568448
-    return _typeof(item) === _typeof(noop) && item.call;
+    return (0, _typeof2["default"])(item) === (0, _typeof2["default"])(noop) && item.call;
   },
       isString = function isString(item) {
-    return _typeof(item) === _typeof("");
+    return (0, _typeof2["default"])(item) === (0, _typeof2["default"])("");
   };
 
   var idMatch = /^#[\w-]*$/,
@@ -1192,7 +1194,7 @@ M.initializeJqueryWrapper = function (plugin, pluginName, classRef) {
         var instance = this[classRef];
         instance[methodOrOptions].apply(instance, params);
       }); // Initialize plugin if options or no argument is passed in
-    } else if (_typeof(methodOrOptions) === 'object' || !methodOrOptions) {
+    } else if ((0, _typeof2["default"])(methodOrOptions) === 'object' || !methodOrOptions) {
       plugin.init(this, arguments[0]);
       return this;
     } // Return error if an unrecognized  method name is passed in
@@ -5349,7 +5351,7 @@ var $jscomp$this = void 0;
         doc = elem && elem.ownerDocument;
     docElem = doc.documentElement;
 
-    if (_typeof(elem.getBoundingClientRect) !== (typeof undefined === "undefined" ? "undefined" : _typeof(undefined))) {
+    if ((0, _typeof2["default"])(elem.getBoundingClientRect) !== (typeof undefined === "undefined" ? "undefined" : (0, _typeof2["default"])(undefined))) {
       box = elem.getBoundingClientRect();
     }
 
@@ -5703,7 +5705,7 @@ var $jscomp$this = void 0;
         } // Set content
 
 
-        if ((typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) === 'object' ? this.message instanceof HTMLElement : this.message && _typeof(this.message) === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
+        if ((typeof HTMLElement === "undefined" ? "undefined" : (0, _typeof2["default"])(HTMLElement)) === 'object' ? this.message instanceof HTMLElement : this.message && (0, _typeof2["default"])(this.message) === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
           toast.appendChild(this.message); // Check if it is jQuery object
         } else if (!!this.message.jquery) {
           $(toast).append(this.message[0]); // Insert as html;
@@ -9319,7 +9321,7 @@ var $jscomp$this = void 0;
       _this53.el.M_Datepicker = _this53;
       _this53.options = $.extend({}, Datepicker.defaults, options); // make sure i18n defaults are not lost when only few i18n option properties are passed
 
-      if (!!options && options.hasOwnProperty('i18n') && _typeof(options.i18n) === 'object') {
+      if (!!options && options.hasOwnProperty('i18n') && (0, _typeof2["default"])(options.i18n) === 'object') {
         _this53.options.i18n = $.extend({}, Datepicker.defaults.i18n, options.i18n);
       } // Remove time component from minDate and maxDate options
 

@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _express = _interopRequireDefault(require("express"));
 
 var _nodeSassMiddleware = _interopRequireDefault(require("node-sass-middleware"));
@@ -14,7 +16,15 @@ var _bodyParser = _interopRequireDefault(require("body-parser"));
 
 var _expressSession = _interopRequireDefault(require("express-session"));
 
-var _connectMongodbSession = _interopRequireDefault(require("connect-mongodb-session"));
+var _connectFlash = _interopRequireDefault(require("connect-flash"));
+
+var _bcrypt = _interopRequireDefault(require("bcrypt"));
+
+var _passport = _interopRequireDefault(require("passport"));
+
+var _passportLocal = require("passport-local");
+
+var _User = _interopRequireDefault(require("./models/User"));
 
 var _publicRoutes = _interopRequireDefault(require("./routes/public/publicRoutes"));
 
@@ -32,12 +42,9 @@ var _registerTravel = _interopRequireDefault(require("./routes/private/registerT
 
 var _deal = _interopRequireDefault(require("./routes/private/deal"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-/* eslint-disable quotes */
-// Routes
-var MongoStore = (0, _connectMongodbSession["default"])(_expressSession["default"]);
-
+// import MongoDBStore from "connect-mongodb-session";
+// Routes and Models
+// const MongoStore = MongoDBStore(session);
 _dotenv["default"].config();
 
 var app = (0, _express["default"])(); // DB Connection
@@ -51,7 +58,40 @@ _mongoose["default"].connect("mongodb://localhost/task-manager", {
 })["catch"](function (err) {
   throw new Error(err);
 }); // Middlewares
-// Sass
+//Initialize Flash
+
+
+app.use((0, _connectFlash["default"])()); //Passport
+
+_passport["default"].serializeUser(function (user, callback) {
+  callback(null, user._id);
+});
+
+_passport["default"].deserializeUser(function (id, callback) {
+  _User["default"].findById(id).then(function (user) {
+    callback(null, user);
+  })["catch"](function (error) {
+    callback(error);
+  });
+});
+
+_passport["default"].use(new _passportLocal.Strategy({
+  passReqToCallback: true
+}, function (req, username, password, callback) {
+  _User["default"].findOne({
+    username: username
+  }).then(function (user) {
+    if (!user || !_bcrypt["default"].compareSync(password, user.password)) {
+      return callback(null, false, {
+        message: "Nome de usuário ou senha incorretos"
+      });
+    }
+
+    callback(null, user);
+  })["catch"](function (error) {
+    callback(error);
+  });
+})); // Sass
 
 
 app.use("/styles", (0, _nodeSassMiddleware["default"])({
@@ -68,19 +108,27 @@ app.use(_bodyParser["default"].urlencoded({
 })); // Cookie
 
 app.use((0, _expressSession["default"])({
-  secret: "basic-auth-secret",
+  secret: process.env.SESSION_COOKIE_SECRET,
+  resave: true,
+  saveUninitialized: true,
   cookie: {
-    maxAge: 60000000
-  },
-  store: new MongoStore({
-    mongooseConnection: _mongoose["default"].connection,
-    ttl: 24 * 60 * 60 // 1 day
-
-  })
-})); // public routes
+    maxAge: +process.env.SESSION_COOKIE_MAX_AGE
+  }
+}));
+app.use(_passport["default"].initialize());
+app.use(_passport["default"].session()); // public routes
 
 app.use("/", _publicRoutes["default"]);
-app.use("/auth", _authRoutes["default"]); // private routes
+app.use("/auth", _authRoutes["default"]); // Private Route Middleware
+
+app.use(function (req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+
+  res.redirect("/auth/login");
+}); // private routes
 
 app.use("/chat", _chat["default"]);
 app.use("/dashboard", _dashboard["default"]);

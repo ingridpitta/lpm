@@ -5,9 +5,13 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import session from "express-session";
-import MongoDBStore from "connect-mongodb-session";
+import flash from "connect-flash";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
 
-// Routes
+// Routes and Models
+import User from "./models/User";
 import publicRoutes from "./routes/public/publicRoutes";
 import authRoutes from "./routes/public/authRoutes";
 import chat from "./routes/private/chat";
@@ -16,8 +20,6 @@ import profile from "./routes/private/profile";
 import registerObject from "./routes/private/registerObject";
 import registerTravel from "./routes/private/registerTravel";
 import deal from "./routes/private/deal";
-
-const MongoStore = MongoDBStore(session);
 
 dotenv.config();
 
@@ -37,7 +39,45 @@ mongoose
 
 // Middlewares
 
-// Sass
+//Initialize Flash
+app.use(flash());
+
+//Passport
+passport.serializeUser((user, callback) => {
+  callback(null, user._id);
+});
+
+passport.deserializeUser((id, callback) => {
+  User.findById(id)
+    .then(user => {
+      callback(null, user);
+    })
+    .catch(error => {
+      callback(error);
+    });
+});
+
+passport.use(
+  new LocalStrategy(
+    { passReqToCallback: true },
+    (req, username, password, callback) => {
+      User.findOne({ username })
+        .then(user => {
+          if (!user || !bcrypt.compareSync(password, user.password)) {
+            return callback(null, false, {
+              message: "Nome de usuário ou senha incorretos"
+            });
+          }
+          callback(null, user);
+        })
+        .catch(error => {
+          callback(error);
+        });
+    }
+  )
+);
+
+// Sass Middleware
 app.use(
   "/styles",
   sassMiddleware({
@@ -56,20 +96,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Cookie
 app.use(
   session({
-    secret: "basic-auth-secret",
-    cookie: { maxAge: 60000000 },
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60 // 1 day
-    })
+    secret: process.env.SESSION_COOKIE_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: +process.env.SESSION_COOKIE_MAX_AGE }
   })
 );
 
-// public routes
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Public Routes
 app.use("/", publicRoutes);
 app.use("/auth", authRoutes);
 
-// private routes
+// Private Route Middleware
+app.use((req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+
+  res.redirect("/auth/login");
+});
+
+// Private Routes
 app.use("/chat", chat);
 app.use("/dashboard", dashboard);
 app.use("/profile", profile);
