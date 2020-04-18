@@ -5,14 +5,14 @@ import User from "../../models/User";
 
 const router = express.Router();
 
-//Signup
+// Signup
 router.get("/signup", (req, res) => {
   res.render("public/signup");
 });
 
 router.post("/signup", async (req, res) => {
   try {
-    //Still have to decide when - and how - save image and rating infos per user
+    // Still have to decide when - and how - save image and rating infos per user
     const { name, username, password, email } = req.body;
     let hashPassword;
 
@@ -51,12 +51,11 @@ router.post("/signup", async (req, res) => {
       res.render("public/signup", {
         errorMessage: "Email já cadastrado. Por favor insira outro email"
       });
-      return;
     }
   }
 });
 
-//Login
+// Login
 router.get("/login", (req, res) => {
   res.render("public/login", { errorMessage: req.flash("error") });
 });

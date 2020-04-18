@@ -42,9 +42,7 @@ var _registerTravel = _interopRequireDefault(require("./routes/private/registerT
 
 var _deal = _interopRequireDefault(require("./routes/private/deal"));
 
-// import MongoDBStore from "connect-mongodb-session";
 // Routes and Models
-// const MongoStore = MongoDBStore(session);
 _dotenv["default"].config();
 
 var app = (0, _express["default"])(); // DB Connection
@@ -91,7 +89,7 @@ _passport["default"].use(new _passportLocal.Strategy({
   })["catch"](function (error) {
     callback(error);
   });
-})); // Sass
+})); // Sass Middleware
 
 
 app.use("/styles", (0, _nodeSassMiddleware["default"])({
@@ -116,7 +114,7 @@ app.use((0, _expressSession["default"])({
   }
 }));
 app.use(_passport["default"].initialize());
-app.use(_passport["default"].session()); // public routes
+app.use(_passport["default"].session()); // Public Routes
 
 app.use("/", _publicRoutes["default"]);
 app.use("/auth", _authRoutes["default"]); // Private Route Middleware
@@ -128,7 +126,7 @@ app.use(function (req, res, next) {
   }
 
   res.redirect("/auth/login");
-}); // private routes
+}); // Private Routes
 
 app.use("/chat", _chat["default"]);
 app.use("/dashboard", _dashboard["default"]);
