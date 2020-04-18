@@ -55,7 +55,8 @@
     "ignore": [
       "./server/public/js/materialize.js",
       "./server/public/js/materialize.min.js",
-      "./server/public/js/editImageSignUp.js"
+      "./server/public/js/editImageSignUp.js",
+      "./server/public/js/location.js"
     ],
     "plugins": [
       [

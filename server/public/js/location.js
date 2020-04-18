@@ -17,13 +17,22 @@ const objectsLocations = () => {
   const objects = document.getElementsByClassName("object--origin");
   console.log({ objects });
   if (objects.length) {
-    const loc = [...objects].map(obj => obj);
-    console.log({ loc });
+    const objectsLocation = [...objects].map(obj => obj.innerText);
+    console.log({ objectsLocation });
   }
 };
 objectsLocations();
-// Getting Travels Locations [Destination]
 
+// Getting Travels Locations [Destination]
+const travelsLocations = () => {
+  const travels = document.getElementsByClassName("travel--origin");
+  console.log({ travels });
+  if (travels.length) {
+    const travelsLocation = [...travels].map(trav => trav.innerText);
+    console.log({ travelsLocation });
+  }
+};
+travelsLocations();
 // Distance Matrix Requests [Objects]
 
 // Distance Matrix Requests [Travels]
