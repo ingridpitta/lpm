@@ -1,1 +1,53 @@
 <h1>DASHBOARD</h1>
+<ul class="right hide-on-med-and-down">
+    <li><a href="registerObject">Registrar Objeto</a></li>
+    <li><a href="registerTravel">Registrar Viagem</a></li>
+</ul>
+
+<ul id="nav-mobile" class="sidenav">
+    <li><a href="registerObject">Registrar Objeto</a></li>
+    <li><a href="registerTravel">Registrar Viagem</a></li>
+</ul>
+
+{{#if travel}}
+{{#each travel}}
+<div>
+    <h3>{{this.description}}</h3>
+    <h3>{{this.origin}}</h3>
+    <h3>{{this.destination}}</h3>
+    <h3>{{this.departure}}</h3>
+    <h3>{{this.arrival}}</h3>
+    <h3>{{this.space}}</h3>
+    <h3>{{this.price}}</h3>
+</div>
+{{/each}}
+{{else}}
+<div>
+    <h2>Nenhuma viagem cadastrada</h2>
+</div>
+{{/if}}
+
+{{#if object}}
+{{#each object}}
+<div>
+    <h3>{{this.description}}</h3>
+    <h3>{{this.origin}}</h3>
+    <h3>{{this.destination}}</h3>
+    <h3>{{this.departure}}</h3>
+    <h3>{{this.arrival}}</h3>
+    <h3>{{this.size}}</h3>
+    <h3>{{this.price}}</h3>
+</div>
+{{/each}}
+{{else}}
+<div>
+    <h2>Nenhum objeto cadastrado</h2>
+</div>
+{{/if}}
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../../js/materialize.js"></script>
+<script src="../../js/init.js"></script>
+<script src="../../js/location.js"></script>

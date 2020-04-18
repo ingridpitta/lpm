@@ -107,9 +107,6 @@ _passport["default"].use(new _passportFacebook.Strategy({
   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
   callbackURL: "".concat(process.env.HOST_URL, "/auth/facebook/callback")
 }, function (accessToken, refreshToken, profile, cb) {
-  console.log({
-    profile: profile
-  });
   var id = profile.id,
       displayName = profile.displayName;
 

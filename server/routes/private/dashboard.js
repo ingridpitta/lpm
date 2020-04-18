@@ -1,31 +1,20 @@
-import express from 'express';
-// import Travel from '../../models/Travel';
-// import UserObject from '../../models/UserObject';
+import express from "express";
+import Travel from "../../models/Travel";
+import UserObject from "../../models/UserObject";
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.render('private/dashboard');
-  // const { user } = req;
-  // const data = async () => {
-  //   const travel = await Travel.find();
-  //   const object = await UserObject.find();
-  //   return { travel, object };
-  // };
+router.get("/", async (req, res) => {
+  const { user } = req;
 
-  // data
-  //   .then((infos) => {
-  //     const travels = infos.travel;
-  //     const objects = infos.object;
-  //     res.render('private/dashboard', {
-  //       travels,
-  //       objects,
-  //       user,
-  //     });
-  //   })
-  //   .catch((err) => {
-  //     throw new Error(err);
-  //   });
+  const travel = await Travel.find();
+  const object = await UserObject.find();
+
+  res.render("private/dashboard", {
+    travel,
+    object,
+    user
+  });
 });
 
 export default router;
