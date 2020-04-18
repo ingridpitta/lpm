@@ -11,11 +11,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var router = _express["default"].Router();
 
-router.get("/login", function (req, res) {
-  res.render("public/login");
+router.get('/login', function (req, res) {
+  res.render('public/login');
 });
-router.get("/signup", function (req, res) {
-  res.render("public/signup");
+router.get('/signup', function (req, res) {
+  res.render('public/signup');
 });
 var _default = router;
 exports["default"] = _default;

@@ -1,1 +1,54 @@
-<h1>LOGIN</h1>
+<nav class="white" role="navigation">
+  <div class="nav-wrapper container">
+    <a id="logo-container" href="/" class="brand-logo">Leva Pra Mim</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="/auth/signup">Cadastre-se</a></li>
+    </ul>
+
+    <ul id="nav-mobile" class="sidenav">
+      <li><a href="/auth/signup">Cadastre-se</a></li>
+    </ul>
+    <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+
+<div class="container auth">
+  <div class="section">
+    <div class="row center">
+      <div class="col offset-l4 l4 offset-m2 m8 offset-s1 s10">
+        <h3>Faça o login</h3>
+
+        <div class="row">
+          <button class="btn btn-block waves-effect waves-light blue darken-4" type="submit">Entre com Facebook</button>
+        </div>
+
+        <div class="row">
+          <p>ou coloque os dados abaixo para entrar<p>
+          <form action="" method="POST">
+
+              <div class="input-field">
+                {{!-- <i class="material-icons prefix">account_circle</i> --}}
+                <input id="username" type="text" class="validate">
+                <label for="username">Username</label>
+              </div>
+
+              <div class="input-field">
+                {{!-- <i class="material-icons prefix">https</i> --}}
+                <input id="password" type="password" class="validate">
+                <label for="password">Password</label>
+              </div>
+
+            <button class="btn btn-block waves-effect waves-light" type="submit">Entrar</button>
+
+          </form>
+        </div>
+      </div>
+        
+    </div>
+  </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../../js/materialize.js"></script>
+<script src="../../js/init.js"></script>

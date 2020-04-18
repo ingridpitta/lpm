@@ -49,6 +49,11 @@
   "babel": {
     "presets": [
       "@babel/preset-env"
+    ],
+    "ignore": [
+      "./server/public/js/materialize.js",
+      "./server/public/js/materialize.min.js",
+      "./server/public/js/jquery-2.1.1.min.js"
     ]
   },
   "bugs": {
