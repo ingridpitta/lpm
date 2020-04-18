@@ -19,7 +19,7 @@ var _passport = _interopRequireDefault(require("passport"));
 
 var _User = _interopRequireDefault(require("../../models/User"));
 
-var router = _express["default"].Router(); //Signup
+var router = _express["default"].Router(); // Signup
 
 
 router.get("/signup", function (req, res) {
@@ -34,7 +34,7 @@ router.post("/signup", /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
-            //Still have to decide when - and how - save image and rating infos per user
+            // Still have to decide when - and how - save image and rating infos per user
             _req$body = req.body, name = _req$body.name, username = _req$body.username, password = _req$body.password, email = _req$body.email;
 
             if (password) {
@@ -54,7 +54,7 @@ router.post("/signup", /*#__PURE__*/function () {
 
           case 6:
             res.redirect("/auth/login");
-            _context.next = 20;
+            _context.next = 18;
             break;
 
           case 9:
@@ -83,17 +83,13 @@ router.post("/signup", /*#__PURE__*/function () {
             return _context.abrupt("return");
 
           case 17:
-            if (!_context.t0.message.includes("email")) {
-              _context.next = 20;
-              break;
+            if (_context.t0.message.includes("email")) {
+              res.render("public/signup", {
+                errorMessage: "Email já cadastrado. Por favor insira outro email"
+              });
             }
 
-            res.render("public/signup", {
-              errorMessage: "Email já cadastrado. Por favor insira outro email"
-            });
-            return _context.abrupt("return");
-
-          case 20:
+          case 18:
           case "end":
             return _context.stop();
         }
@@ -104,7 +100,7 @@ router.post("/signup", /*#__PURE__*/function () {
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
   };
-}()); //Login
+}()); // Login
 
 router.get("/login", function (req, res) {
   res.render("public/login", {
