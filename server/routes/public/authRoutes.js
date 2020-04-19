@@ -10,4 +10,8 @@ router.get('/signup', (req, res) => {
   res.render('public/signup');
 });
 
+router.get('/signup-step/', (req, res) => {
+  res.render('public/signup-step');
+});
+
 export default router;

@@ -17,5 +17,8 @@ router.get('/login', function (req, res) {
 router.get('/signup', function (req, res) {
   res.render('public/signup');
 });
+router.get('/signup-step/', function (req, res) {
+  res.render('public/signup-step');
+});
 var _default = router;
 exports["default"] = _default;
