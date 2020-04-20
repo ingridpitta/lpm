@@ -24,29 +24,33 @@
 
         <div class="row">
           <p>ou coloque os dados abaixo para efetuar o cadastro</p>
-          <form action="" method="GET">
-
+          <form action="/auth/signup" method="POST">
+              {{#if errorMessage}}
+              <div>
+                <p class="error-message">{{errorMessage}}</p>
+              </div>
+              {{/if}}
               <div class="input-field">
-                <input id="name" type="text" class="validate">
+                <input id="name" name="name" type="text" class="validate">
                 <label for="name">Seu nome</label>
               </div>
 
               <div class="input-field">
-                <input id="email" type="text" class="validate">
+                <input id="email" name="email" type="email" class="validate">
                 <label for="email">Seu e-mail</label>
               </div>
 
               <div class="input-field">
-                <input id="username" type="text" class="validate">
-                <label for="username">Escolha um username?</label>
+                <input id="username" name="username" type="text" class="validate">
+                <label for="username">Escolha um nome de usuário</label>
               </div>
 
               <div class="input-field">
-                <input id="password" type="password" class="validate">
+                <input id="password" name="password" type="password" class="validate">
                 <label for="password">Escolha uma senha</label>
               </div>
 
-            <a class="btn btn-block waves-effect waves-light" type="submit" href="/auth/signup-step">Cadastrar</a>
+            <button class="btn btn-block waves-effect waves-light" type="submit">Cadastrar</button>
 
           </form>
         </div>

@@ -1,10 +1,7 @@
 "use strict";
 
-<<<<<<< HEAD
-=======
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -12,11 +9,6 @@ exports["default"] = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-<<<<<<< HEAD
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-=======
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 var Schema = _mongoose["default"].Schema;
 var userSchema = new Schema({
   facebookId: {
@@ -37,15 +29,17 @@ var userSchema = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   image: {
-    type: Buffer
+    type: String,
+    "default": 'http://placehold.it/120x120&text=image1'
   },
   rating: {
-    type: Number
+    type: Number,
+    "default": 0
   },
-  // created: { type: String }, Mongoose já tem getTimeStamp. Devemos ainda adicionar essa campo?
   status: {
     type: Boolean,
     required: true,

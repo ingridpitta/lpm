@@ -1,35 +1,24 @@
-<<<<<<< HEAD
 import express from 'express';
-
-const router = express.Router();
-
-router.get('/login', (req, res) => {
-  res.render('public/login');
-});
-
-router.get('/signup', (req, res) => {
-  res.render('public/signup');
-});
-
-router.get('/signup-step/', (req, res) => {
-  res.render('public/signup-step');
-=======
-import express from "express";
-import bcrypt from "bcrypt";
-import passport from "passport";
-import User from "../../models/User";
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import User from '../../models/User';
 
 const router = express.Router();
 
 // Signup
-router.get("/signup", (req, res) => {
-  res.render("public/signup");
+router.get('/signup', (req, res) => {
+  res.render('public/signup');
 });
 
-router.post("/signup", async (req, res) => {
+router.post('/signup', async (req, res) => {
   try {
     // Still have to decide when - and how - save image and rating infos per user
-    const { name, username, password, email } = req.body;
+    const {
+      name,
+      username,
+      password,
+      email,
+    } = req.body;
     let hashPassword;
 
     if (password) {
@@ -42,55 +31,55 @@ router.post("/signup", async (req, res) => {
       name,
       username,
       password: hashPassword,
-      email
+      email,
     });
     await newUser.save();
-
-    res.redirect("/auth/login");
+    // res.redirect(307, '/auth/login');
+    console.log('PASSSOu');
+    res.render('private/signup-step');
   } catch (error) {
-    if (error.message.includes("required")) {
-      res.render("public/signup", {
-        errorMessage: "Por favor, preencha todos os campos"
+    if (error.message.includes('required')) {
+      res.render('public/signup', {
+        errorMessage: 'Email já cadastrado. Por favor insira outro email',
       });
       return;
     }
 
-    if (error.message.includes("username")) {
-      res.render("public/signup", {
+    if (error.message.includes('email')) {
+      res.render('public/signup', {
+        errorMessage: 'Email já cadastrado. Por favor insira outro email',
+      });
+      return;
+    }
+
+    if (error.message.includes('username')) {
+      res.render('public/signup', {
         errorMessage:
-          "Usuário já cadastrado. Por favor escolha outro nome de usuário"
-      });
-      return;
-    }
-
-    if (error.message.includes("email")) {
-      res.render("public/signup", {
-        errorMessage: "Email já cadastrado. Por favor insira outro email"
+          'Nome de usuário já cadastrado. Por favor escolha outro nome de usuário',
       });
     }
   }
 });
 
 // Login
-router.get("/login", (req, res) => {
-  res.render("public/login", { errorMessage: req.flash("error") });
+router.get('/login', (req, res) => {
+  res.render('public/login', { errorMessage: req.flash('error') });
 });
 
 router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/dashboard",
-    failureRedirect: "/auth/login",
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/auth/login',
     failureFlash: true,
-    passReqToCallback: true
-  })
+    passReqToCallback: true,
+  }),
 );
 
 // Logout
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout();
-  res.redirect("/auth/login");
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
+  res.redirect('/auth/login');
 });
 
 export default router;

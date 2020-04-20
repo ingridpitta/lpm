@@ -1,20 +1,7 @@
-<<<<<<< HEAD
 /*!
  * Materialize v1.0.0 (http://materializecss.com)
  * Copyright 2014-2017 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
-=======
-"use strict";
-
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
-var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
-
-/*!
- * Materialize v1.0.0 (http://materializecss.com)
- * Copyright 2014-2017 Materialize
- * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
  */
 var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 
@@ -26,56 +13,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-<<<<<<< HEAD
-=======
-var _createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-function _possibleConstructorReturn(self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return call && ((0, _typeof2["default"])(call) === "object" || typeof call === "function") ? call : self;
-}
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (0, _typeof2["default"])(superClass));
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-}
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 /*! cash-dom 1.3.5, https://github.com/kenwheeler/cash @license MIT */
 (function (factory) {
   window.cash = factory();
@@ -90,17 +27,10 @@ function _classCallCheck(instance, Constructor) {
   var noop = function () {},
       isFunction = function (item) {
     // @see https://crbug.com/568448
-<<<<<<< HEAD
     return typeof item === typeof noop && item.call;
   },
       isString = function (item) {
     return typeof item === typeof "";
-=======
-    return (0, _typeof2["default"])(item) === (0, _typeof2["default"])(noop) && item.call;
-  },
-      isString = function isString(item) {
-    return (0, _typeof2["default"])(item) === (0, _typeof2["default"])("");
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
   };
 
   var idMatch = /^#[\w-]*$/,
@@ -1216,15 +1146,10 @@ M.initializeJqueryWrapper = function (plugin, pluginName, classRef) {
       return this.each(function () {
         var instance = this[classRef];
         instance[methodOrOptions].apply(instance, params);
-<<<<<<< HEAD
       });
 
       // Initialize plugin if options or no argument is passed in
     } else if (typeof methodOrOptions === 'object' || !methodOrOptions) {
-=======
-      }); // Initialize plugin if options or no argument is passed in
-    } else if ((0, _typeof2["default"])(methodOrOptions) === 'object' || !methodOrOptions) {
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
       plugin.init(this, arguments[0]);
       return this;
     }
@@ -4878,11 +4803,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
     docElem = doc.documentElement;
 
-<<<<<<< HEAD
     if (typeof elem.getBoundingClientRect !== typeof undefined) {
-=======
-    if ((0, _typeof2["default"])(elem.getBoundingClientRect) !== (typeof undefined === "undefined" ? "undefined" : (0, _typeof2["default"])(undefined))) {
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
       box = elem.getBoundingClientRect();
     }
     win = getWindow(doc);
@@ -5252,12 +5173,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         if (typeof HTMLElement === 'object' ? this.message instanceof HTMLElement : this.message && typeof this.message === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
           toast.appendChild(this.message);
 
-<<<<<<< HEAD
           // Check if it is jQuery object
-=======
-        if ((typeof HTMLElement === "undefined" ? "undefined" : (0, _typeof2["default"])(HTMLElement)) === 'object' ? this.message instanceof HTMLElement : this.message && (0, _typeof2["default"])(this.message) === 'object' && this.message !== null && this.message.nodeType === 1 && typeof this.message.nodeName === 'string') {
-          toast.appendChild(this.message); // Check if it is jQuery object
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
         } else if (!!this.message.jquery) {
           $(toast).append(this.message[0]);
 
@@ -8909,13 +8825,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
       _this53.el.M_Datepicker = _this53;
 
-<<<<<<< HEAD
       _this53.options = $.extend({}, Datepicker.defaults, options);
-=======
-      if (!!options && options.hasOwnProperty('i18n') && (0, _typeof2["default"])(options.i18n) === 'object') {
-        _this53.options.i18n = $.extend({}, Datepicker.defaults.i18n, options.i18n);
-      } // Remove time component from minDate and maxDate options
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 
       // make sure i18n defaults are not lost when only few i18n option properties are passed
       if (!!options && options.hasOwnProperty('i18n') && typeof options.i18n === 'object') {

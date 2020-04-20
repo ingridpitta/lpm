@@ -46,6 +46,17 @@ body {
 .input-field {
   margin-bottom: 2em;
 }
+
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.action-done {
+  display: none;
+}
  
  .sidenav-trigger {
    color: black;
@@ -70,6 +81,10 @@ body {
     margin-bottom: 2em;
   }
 
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+  }
 
  
  @media only screen and (max-width : 992px) {

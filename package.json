@@ -51,12 +51,11 @@
     "presets": [
       "@babel/preset-env"
     ],
-<<<<<<< HEAD
     "ignore": [
       "./server/public/js/materialize.js",
       "./server/public/js/materialize.min.js",
-      "./server/public/js/jquery-2.1.1.min.js"
-=======
+      "./server/public/js/editImageSignUp.js"
+    ],
     "plugins": [
       [
         "@babel/plugin-transform-runtime",
@@ -64,7 +63,6 @@
           "regenerator": true
         }
       ]
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
     ]
   },
   "bugs": {

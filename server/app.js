@@ -1,14 +1,17 @@
-<<<<<<< HEAD
-import path from 'path';
 import express from 'express';
 import sassMiddleware from 'node-sass-middleware';
+import path from 'path';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import session from 'express-session';
-import MongoDBStore from 'connect-mongodb-session';
+import flash from 'connect-flash';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
 
-// Routes
+// Routes and Models
+import User from './models/User';
 import publicRoutes from './routes/public/publicRoutes';
 import authRoutes from './routes/public/authRoutes';
 import chat from './routes/private/chat';
@@ -17,30 +20,6 @@ import profile from './routes/private/profile';
 import registerObject from './routes/private/registerObject';
 import registerTravel from './routes/private/registerTravel';
 import deal from './routes/private/deal';
-=======
-import express from "express";
-import sassMiddleware from "node-sass-middleware";
-import path from "path";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import bodyParser from "body-parser";
-import session from "express-session";
-import flash from "connect-flash";
-import bcrypt from "bcrypt";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
-
-// Routes and Models
-import User from "./models/User";
-import publicRoutes from "./routes/public/publicRoutes";
-import authRoutes from "./routes/public/authRoutes";
-import chat from "./routes/private/chat";
-import dashboard from "./routes/private/dashboard";
-import profile from "./routes/private/profile";
-import registerObject from "./routes/private/registerObject";
-import registerTravel from "./routes/private/registerTravel";
-import deal from "./routes/private/deal";
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 
 dotenv.config();
 
@@ -48,10 +27,13 @@ const app = express();
 
 // DB Connection
 mongoose
-  .connect('mongodb://localhost/task-manager', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    process.env.MONGOBD_URI,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    },
+  )
   // eslint-disable-next-line no-console
   .then(() => console.log('Conectado ao Banco de Dados'))
   .catch((err) => {
@@ -60,20 +42,20 @@ mongoose
 
 // Middlewares
 
-//Initialize Flash
+// Initialize Flash
 app.use(flash());
 
-//Passport
+// Passport
 passport.serializeUser((user, callback) => {
   callback(null, user._id);
 });
 
 passport.deserializeUser((id, callback) => {
   User.findById(id)
-    .then(user => {
+    .then((user) => {
       callback(null, user);
     })
-    .catch(error => {
+    .catch((error) => {
       callback(error);
     });
 });
@@ -83,19 +65,19 @@ passport.use(
     { passReqToCallback: true },
     (req, username, password, callback) => {
       User.findOne({ username })
-        .then(user => {
+        .then((user) => {
           if (!user || !bcrypt.compareSync(password, user.password)) {
             return callback(null, false, {
-              message: "Nome de usuário ou senha incorretos"
+              message: 'Nome de usuário ou senha incorretos',
             });
           }
-          callback(null, user);
+          return callback(null, user);
         })
-        .catch(error => {
+        .catch((error) => {
           callback(error);
         });
-    }
-  )
+    },
+  ),
 );
 
 // Sass Middleware
@@ -117,41 +99,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Cookie
 app.use(
   session({
-<<<<<<< HEAD
-    secret: 'basic-auth-secret',
-    cookie: { maxAge: 60000000 },
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection,
-      ttl: 24 * 60 * 60, // 1 day
-    }),
-  }),
-);
-
-// public routes
-app.use('/', publicRoutes);
-app.use('/auth', authRoutes);
-
-// private routes
-app.use('/chat', chat);
-app.use('/dashboard', dashboard);
-app.use('/profile', profile);
-app.use('/registerObject', registerObject);
-app.use('/registerTravel', registerTravel);
-app.use('/deal', deal);
-=======
     secret: process.env.SESSION_COOKIE_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: +process.env.SESSION_COOKIE_MAX_AGE }
-  })
+    cookie: { maxAge: +process.env.SESSION_COOKIE_MAX_AGE },
+  }),
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Public Routes
-app.use("/", publicRoutes);
-app.use("/auth", authRoutes);
+app.use('/', publicRoutes);
+app.use('/auth', authRoutes);
 
 // Private Route Middleware
 app.use((req, res, next) => {
@@ -160,17 +120,16 @@ app.use((req, res, next) => {
     return;
   }
 
-  res.redirect("/auth/login");
+  res.redirect('/auth/login');
 });
 
 // Private Routes
-app.use("/chat", chat);
-app.use("/dashboard", dashboard);
-app.use("/profile", profile);
-app.use("/registerObject", registerObject);
-app.use("/registerTravel", registerTravel);
-app.use("/deal", deal);
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
+app.use('/chat', chat);
+app.use('/dashboard', dashboard);
+app.use('/profile', profile);
+app.use('/registerObject', registerObject);
+app.use('/registerTravel', registerTravel);
+app.use('/deal', deal);
 
 // eslint-disable-next-line no-console
 app.listen(process.env.PORT, () => console.log(`Running in PORT ${process.env.PORT}`));

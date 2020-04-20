@@ -1,14 +1,12 @@
 "use strict";
 
-<<<<<<< HEAD
-var _path = _interopRequireDefault(require("path"));
-=======
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 
 var _express = _interopRequireDefault(require("express"));
 
 var _nodeSassMiddleware = _interopRequireDefault(require("node-sass-middleware"));
+
+var _path = _interopRequireDefault(require("path"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
@@ -44,20 +42,12 @@ var _registerTravel = _interopRequireDefault(require("./routes/private/registerT
 
 var _deal = _interopRequireDefault(require("./routes/private/deal"));
 
-<<<<<<< HEAD
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-// Routes
-var MongoStore = (0, _connectMongodbSession["default"])(_expressSession["default"]);
-
-=======
 // Routes and Models
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 _dotenv["default"].config();
 
 var app = (0, _express["default"])(); // DB Connection
 
-_mongoose["default"].connect('mongodb://localhost/task-manager', {
+_mongoose["default"].connect(process.env.MONGOBD_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }) // eslint-disable-next-line no-console
@@ -66,10 +56,10 @@ _mongoose["default"].connect('mongodb://localhost/task-manager', {
 })["catch"](function (err) {
   throw new Error(err);
 }); // Middlewares
-//Initialize Flash
+// Initialize Flash
 
 
-app.use((0, _connectFlash["default"])()); //Passport
+app.use((0, _connectFlash["default"])()); // Passport
 
 _passport["default"].serializeUser(function (user, callback) {
   callback(null, user._id);
@@ -91,11 +81,11 @@ _passport["default"].use(new _passportLocal.Strategy({
   }).then(function (user) {
     if (!user || !_bcrypt["default"].compareSync(password, user.password)) {
       return callback(null, false, {
-        message: "Nome de usuário ou senha incorretos"
+        message: 'Nome de usuário ou senha incorretos'
       });
     }
 
-    callback(null, user);
+    return callback(null, user);
   })["catch"](function (error) {
     callback(error);
   });
@@ -116,13 +106,9 @@ app.use(_bodyParser["default"].urlencoded({
 })); // Cookie
 
 app.use((0, _expressSession["default"])({
-<<<<<<< HEAD
-  secret: 'basic-auth-secret',
-=======
   secret: process.env.SESSION_COOKIE_SECRET,
   resave: true,
   saveUninitialized: true,
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
   cookie: {
     maxAge: +process.env.SESSION_COOKIE_MAX_AGE
   }
@@ -130,12 +116,8 @@ app.use((0, _expressSession["default"])({
 app.use(_passport["default"].initialize());
 app.use(_passport["default"].session()); // Public Routes
 
-<<<<<<< HEAD
 app.use('/', _publicRoutes["default"]);
-app.use('/auth', _authRoutes["default"]); // private routes
-=======
-app.use("/", _publicRoutes["default"]);
-app.use("/auth", _authRoutes["default"]); // Private Route Middleware
+app.use('/auth', _authRoutes["default"]); // Private Route Middleware
 
 app.use(function (req, res, next) {
   if (req.isAuthenticated()) {
@@ -143,9 +125,8 @@ app.use(function (req, res, next) {
     return;
   }
 
-  res.redirect("/auth/login");
+  res.redirect('/auth/login');
 }); // Private Routes
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
 
 app.use('/chat', _chat["default"]);
 app.use('/dashboard', _dashboard["default"]);

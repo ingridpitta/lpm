@@ -22,21 +22,10 @@ var _User = _interopRequireDefault(require("../../models/User"));
 var router = _express["default"].Router(); // Signup
 
 
-<<<<<<< HEAD
-router.get('/login', function (req, res) {
-  res.render('public/login');
-});
 router.get('/signup', function (req, res) {
   res.render('public/signup');
 });
-router.get('/signup-step/', function (req, res) {
-  res.render('public/signup-step');
-=======
-router.get("/signup", function (req, res) {
-  res.render("public/signup");
->>>>>>> a2413d15cbb9dfbf27346160456c84b24f31924e
-});
-router.post("/signup", /*#__PURE__*/function () {
+router.post('/signup', /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var _req$body, name, username, password, email, hashPassword, saltRouds, salt, newUser;
 
@@ -64,48 +53,50 @@ router.post("/signup", /*#__PURE__*/function () {
             return newUser.save();
 
           case 6:
-            res.redirect("/auth/login");
-            _context.next = 18;
+            // res.redirect(307, '/auth/login');
+            console.log('PASSSOu');
+            res.render('private/signup-step');
+            _context.next = 19;
             break;
 
-          case 9:
-            _context.prev = 9;
+          case 10:
+            _context.prev = 10;
             _context.t0 = _context["catch"](0);
 
-            if (!_context.t0.message.includes("required")) {
-              _context.next = 14;
+            if (!_context.t0.message.includes('required')) {
+              _context.next = 15;
               break;
             }
 
-            res.render("public/signup", {
-              errorMessage: "Por favor, preencha todos os campos"
+            res.render('public/signup', {
+              errorMessage: 'Email já cadastrado. Por favor insira outro email'
             });
             return _context.abrupt("return");
 
-          case 14:
-            if (!_context.t0.message.includes("username")) {
-              _context.next = 17;
+          case 15:
+            if (!_context.t0.message.includes('email')) {
+              _context.next = 18;
               break;
             }
 
-            res.render("public/signup", {
-              errorMessage: "Usuário já cadastrado. Por favor escolha outro nome de usuário"
+            res.render('public/signup', {
+              errorMessage: 'Email já cadastrado. Por favor insira outro email'
             });
             return _context.abrupt("return");
 
-          case 17:
-            if (_context.t0.message.includes("email")) {
-              res.render("public/signup", {
-                errorMessage: "Email já cadastrado. Por favor insira outro email"
+          case 18:
+            if (_context.t0.message.includes('username')) {
+              res.render('public/signup', {
+                errorMessage: 'Nome de usuário já cadastrado. Por favor escolha outro nome de usuário'
               });
             }
 
-          case 18:
+          case 19:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 9]]);
+    }, _callee, null, [[0, 10]]);
   }));
 
   return function (_x, _x2) {
@@ -113,21 +104,21 @@ router.post("/signup", /*#__PURE__*/function () {
   };
 }()); // Login
 
-router.get("/login", function (req, res) {
-  res.render("public/login", {
-    errorMessage: req.flash("error")
+router.get('/login', function (req, res) {
+  res.render('public/login', {
+    errorMessage: req.flash('error')
   });
 });
-router.post("/login", _passport["default"].authenticate("local", {
-  successRedirect: "/dashboard",
-  failureRedirect: "/auth/login",
+router.post('/login', _passport["default"].authenticate('local', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/auth/login',
   failureFlash: true,
   passReqToCallback: true
 })); // Logout
 
-router.get("/logout", function (req, res) {
+router.get('/logout', function (req, res) {
   req.logout();
-  res.redirect("/auth/login");
+  res.redirect('/auth/login');
 });
 var _default = router;
 exports["default"] = _default;
