@@ -1,0 +1,42 @@
+<div class="container auth">
+  <div class="section">
+    <div class="row center">
+      <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+        <h1 class="center green-text"><i class="large material-icons">check</i></h1>
+        <h3>Legal! Seu cadastro foi efetuado com sucesso.</h3>
+        <p>E que tal, antes de continuarmos, você subir uma foto sua? <br> É importante para a segurança e confiança.</p>
+        
+        <div class="row">
+          <form action="" method="POST">
+
+            <div>
+              <div id="main-cropper"></div>
+              <a class="btn btn-block waves-effect waves-light action-upload">
+                <span>Buscar foto</span>
+                <input type="file" id="upload" value="Choose Image" accept="image/*">
+              </a>
+              <a id="action-new-upload" class="btn btn-block waves-effect waves-light action-done">
+                <span>Buscar nova foto</span>
+                <input type="file" id="upload" value="Choose Image" accept="image/*">
+              </a>
+              <button class="btn btn-block waves-effect waves-light action-done" type="submit">Continuar</button>
+
+            </div>
+
+            <div>
+              <h6><a href="/auth/signup-step">Continuar sem foto</a></h6>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+        
+    </div>
+  </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.js"></script>
+<script src="../../js/editImageSignUp.js"></script>

@@ -1,5 +1,121 @@
 @import "./materialize.scss";
+@import url('https://fonts.googleapis.com/css?family=Barlow:300,400,600,700,900');
+
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+* {
+  font-family: 'Barlow', sans-serif;
+}
 
 body {
-  background-color: $primary-color;
+  font-size: 16px;
 }
+
+ nav ul a,
+ nav .brand-logo {
+   color: black;
+ }
+
+ h1 {
+   font-size: 3.5em;
+ }
+
+ h5 {
+  line-height: 1.5em;
+}
+ 
+ p {
+   line-height: 2rem;
+ }
+
+ button {
+   font-family: 'Barlow', sans-serif;
+ }
+
+.btn-block {
+  width: 100%;
+}
+
+.input-field {
+  margin-bottom: 2em;
+}
+
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.action-done {
+  display: none;
+}
+ 
+ .sidenav-trigger {
+   color: black;
+ }
+ 
+ .parallax-container {
+   min-height: 420px;
+   line-height: 0;
+   height: auto;
+   color: rgba(255,255,255,.9);
+ }
+
+ .parallax-container .section {
+   width: 100%;
+  }
+
+  .auth h3, button {
+      margin-bottom: 1em;
+  }
+
+  .auth p {
+    margin-bottom: 2em;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.8em;
+  }
+
+ 
+ @media only screen and (max-width : 992px) {
+   .parallax-container .section {
+     position: absolute;
+     top: 40%;
+   }
+   #index-banner .section {
+     top: 10%;
+   }
+   nav .brand-logo {
+     font-size: 1.5em;
+   }
+
+ }
+ 
+ @media only screen and (max-width : 600px) {
+   
+  #index-banner .section {
+     top: 0;
+   }
+ }
+ 
+ .icon-block {
+   padding: 0 15px;
+ }
+ .icon-block .material-icons {
+   font-size: inherit;
+ }
+ 
+ footer.page-footer {
+   margin: 0;
+ }
+ 

@@ -7,10 +7,9 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  email: { type: String, required: true },
-  image: { type: Buffer },
-  rating: { type: Number },
-  // created: { type: String }, Mongoose já tem getTimeStamp. Devemos ainda adicionar essa campo?
+  email: { type: String, required: true, unique: true },
+  image: { type: String, default: 'http://placehold.it/120x120&text=image1' },
+  rating: { type: Number, default: 0 },
   status: { type: Boolean, required: true, default: true },
 });
 
