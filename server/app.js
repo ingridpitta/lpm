@@ -1,25 +1,25 @@
-import express from 'express';
-import sassMiddleware from 'node-sass-middleware';
-import path from 'path';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import session from 'express-session';
-import flash from 'connect-flash';
-import bcrypt from 'bcrypt';
-import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+import express from "express";
+import sassMiddleware from "node-sass-middleware";
+import path from "path";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import session from "express-session";
+import flash from "connect-flash";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
 
 // Routes and Models
-import User from './models/User';
-import publicRoutes from './routes/public/publicRoutes';
-import authRoutes from './routes/public/authRoutes';
-import chat from './routes/private/chat';
-import dashboard from './routes/private/dashboard';
-import profile from './routes/private/profile';
-import registerObject from './routes/private/registerObject';
-import registerTravel from './routes/private/registerTravel';
-import deal from './routes/private/deal';
+import User from "./models/User";
+import publicRoutes from "./routes/public/publicRoutes";
+import authRoutes from "./routes/public/authRoutes";
+import chat from "./routes/private/chat";
+import dashboard from "./routes/private/dashboard";
+import profile from "./routes/private/profile";
+import registerObject from "./routes/private/registerObject";
+import registerTravel from "./routes/private/registerTravel";
+import deal from "./routes/private/deal";
 
 dotenv.config();
 
@@ -27,16 +27,14 @@ const app = express();
 
 // DB Connection
 mongoose
-  .connect(
-    process.env.MONGOBD_URI,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    },
-  )
+  .connect(process.env.MONGOBD_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  })
   // eslint-disable-next-line no-console
-  .then(() => console.log('Conectado ao Banco de Dados'))
-  .catch((err) => {
+  .then(() => console.log(`Conectado ao Banco ${process.env.MONGOBD_URI}`))
+  .catch(err => {
     throw new Error(err);
   });
 
@@ -52,10 +50,10 @@ passport.serializeUser((user, callback) => {
 
 passport.deserializeUser((id, callback) => {
   User.findById(id)
-    .then((user) => {
+    .then(user => {
       callback(null, user);
     })
-    .catch((error) => {
+    .catch(error => {
       callback(error);
     });
 });
@@ -64,36 +62,39 @@ passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
     (req, username, password, callback) => {
+      console.log({ req, username });
+      console.log("qualquer");
       User.findOne({ username })
-        .then((user) => {
+        .then(user => {
           if (!user || !bcrypt.compareSync(password, user.password)) {
             return callback(null, false, {
-              message: 'Nome de usuário ou senha incorretos',
+              message: "Nome de usuário ou senha incorretos"
             });
           }
           return callback(null, user);
         })
-        .catch((error) => {
+        .catch(error => {
           callback(error);
         });
-    },
-  ),
+    }
+  )
 );
 
 // Sass Middleware
 app.use(
-  '/styles',
+  "/styles",
   sassMiddleware({
     src: `${__dirname}/sass`,
-    dest: path.join(__dirname, 'public', 'styles'),
+    dest: path.join(__dirname, "public", "styles"),
     debug: true,
-    outputStyle: 'compressed',
-  }),
+    outputStyle: "compressed"
+  })
 );
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "hbs");
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Cookie
@@ -102,16 +103,16 @@ app.use(
     secret: process.env.SESSION_COOKIE_SECRET,
     resave: true,
     saveUninitialized: true,
-    cookie: { maxAge: +process.env.SESSION_COOKIE_MAX_AGE },
-  }),
+    cookie: { maxAge: +process.env.SESSION_COOKIE_MAX_AGE }
+  })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Public Routes
-app.use('/', publicRoutes);
-app.use('/auth', authRoutes);
+app.use("/", publicRoutes);
+app.use("/auth", authRoutes);
 
 // Private Route Middleware
 app.use((req, res, next) => {
@@ -120,16 +121,18 @@ app.use((req, res, next) => {
     return;
   }
 
-  res.redirect('/auth/login');
+  res.redirect("/auth/login");
 });
 
 // Private Routes
-app.use('/chat', chat);
-app.use('/dashboard', dashboard);
-app.use('/profile', profile);
-app.use('/registerObject', registerObject);
-app.use('/registerTravel', registerTravel);
-app.use('/deal', deal);
+app.use("/chat", chat);
+app.use("/dashboard", dashboard);
+app.use("/profile", profile);
+app.use("/registerObject", registerObject);
+app.use("/registerTravel", registerTravel);
+app.use("/deal", deal);
 
 // eslint-disable-next-line no-console
-app.listen(process.env.PORT, () => console.log(`Running in PORT ${process.env.PORT}`));
+app.listen(process.env.PORT, () =>
+  console.log(`Running in PORT ${process.env.PORT}`)
+);
