@@ -9,6 +9,7 @@ import flash from "connect-flash";
 import bcrypt from "bcrypt";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as FacebookStrategy } from "passport-facebook";
 
 // Routes and Models
 import User from "./models/User";
@@ -16,7 +17,7 @@ import publicRoutes from "./routes/public/publicRoutes";
 import authRoutes from "./routes/public/authRoutes";
 import chat from "./routes/private/chat";
 import dashboard from "./routes/private/dashboard";
-import profile from "./routes/private/profile";
+import profileInfos from "./routes/private/profileInfos";
 import registerObject from "./routes/private/registerObject";
 import registerTravel from "./routes/private/registerTravel";
 import deal from "./routes/private/deal";
@@ -27,13 +28,13 @@ const app = express();
 
 // DB Connection
 mongoose
-  .connect(process.env.MONGOBD_URI, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   })
   // eslint-disable-next-line no-console
-  .then(() => console.log(`Conectado ao Banco ${process.env.MONGOBD_URI}`))
+  .then(() => console.log(`Conectado ao Banco ${process.env.MONGODB_URI}`))
   .catch(err => {
     throw new Error(err);
   });
@@ -58,6 +59,7 @@ passport.deserializeUser((id, callback) => {
     });
 });
 
+// Local Strategy
 passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
@@ -76,6 +78,39 @@ passport.use(
         .catch(error => {
           callback(error);
         });
+    }
+  )
+);
+
+// Facebook Strategy
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      callbackURL: `${process.env.HOST_URL}/auth/facebook/callback`
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      const { id, displayName } = profile;
+      User.findOrCreate(
+        { facebookId: id },
+        {
+          name: displayName,
+          username: `${displayName
+            .toLowerCase()
+            .split(" ")
+            .join("")}`,
+          password: `${displayName
+            .toLowerCase()
+            .split(" ")
+            .join("")}.${id}`,
+          email: `${displayName
+            .toLowerCase()
+            .split(" ")
+            .join("")}.${id}@lpm.com.br`
+        },
+        (err, user) => cb(err, user)
+      );
     }
   )
 );
@@ -127,7 +162,7 @@ app.use((req, res, next) => {
 // Private Routes
 app.use("/chat", chat);
 app.use("/dashboard", dashboard);
-app.use("/profile", profile);
+app.use("/profile", profileInfos);
 app.use("/registerObject", registerObject);
 app.use("/registerTravel", registerTravel);
 app.use("/deal", deal);

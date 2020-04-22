@@ -112,7 +112,14 @@ router.post("/login", _passport["default"].authenticate("local", {
   failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
-})); // Logout
+})); // Facebook Login
+
+router.get("/facebook", _passport["default"].authenticate("facebook"));
+router.get("/facebook/callback", _passport["default"].authenticate("facebook", {
+  failureRedirect: "/auth/login"
+}), function (req, res) {
+  res.redirect("/dashboard");
+}); // Logout
 
 router.get("/logout", function (req, res) {
   req.logout();

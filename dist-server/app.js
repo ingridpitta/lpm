@@ -24,6 +24,8 @@ var _passport = _interopRequireDefault(require("passport"));
 
 var _passportLocal = require("passport-local");
 
+var _passportFacebook = require("passport-facebook");
+
 var _User = _interopRequireDefault(require("./models/User"));
 
 var _publicRoutes = _interopRequireDefault(require("./routes/public/publicRoutes"));
@@ -34,7 +36,7 @@ var _chat = _interopRequireDefault(require("./routes/private/chat"));
 
 var _dashboard = _interopRequireDefault(require("./routes/private/dashboard"));
 
-var _profile = _interopRequireDefault(require("./routes/private/profile"));
+var _profileInfos = _interopRequireDefault(require("./routes/private/profileInfos"));
 
 var _registerObject = _interopRequireDefault(require("./routes/private/registerObject"));
 
@@ -47,13 +49,13 @@ _dotenv["default"].config();
 
 var app = (0, _express["default"])(); // DB Connection
 
-_mongoose["default"].connect(process.env.MONGOBD_URI, {
+_mongoose["default"].connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
 }) // eslint-disable-next-line no-console
 .then(function () {
-  return console.log("Conectado ao Banco ".concat(process.env.MONGOBD_URI));
+  return console.log("Conectado ao Banco ".concat(process.env.MONGODB_URI));
 })["catch"](function (err) {
   throw new Error(err);
 }); // Middlewares
@@ -72,7 +74,8 @@ _passport["default"].deserializeUser(function (id, callback) {
   })["catch"](function (error) {
     callback(error);
   });
-});
+}); // Local Strategy
+
 
 _passport["default"].use(new _passportLocal.Strategy({
   passReqToCallback: true
@@ -95,6 +98,30 @@ _passport["default"].use(new _passportLocal.Strategy({
     return callback(null, user);
   })["catch"](function (error) {
     callback(error);
+  });
+})); // Facebook Strategy
+
+
+_passport["default"].use(new _passportFacebook.Strategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: "".concat(process.env.HOST_URL, "/auth/facebook/callback")
+}, function (accessToken, refreshToken, profile, cb) {
+  console.log({
+    profile: profile
+  });
+  var id = profile.id,
+      displayName = profile.displayName;
+
+  _User["default"].findOrCreate({
+    facebookId: id
+  }, {
+    name: displayName,
+    username: "".concat(displayName.toLowerCase().split(" ").join("")),
+    password: "".concat(displayName.toLowerCase().split(" ").join(""), ".").concat(id),
+    email: "".concat(displayName.toLowerCase().split(" ").join(""), ".").concat(id, "@lpm.com.br")
+  }, function (err, user) {
+    return cb(err, user);
   });
 })); // Sass Middleware
 
@@ -138,7 +165,7 @@ app.use(function (req, res, next) {
 
 app.use("/chat", _chat["default"]);
 app.use("/dashboard", _dashboard["default"]);
-app.use("/profile", _profile["default"]);
+app.use("/profile", _profileInfos["default"]);
 app.use("/registerObject", _registerObject["default"]);
 app.use("/registerTravel", _registerTravel["default"]);
 app.use("/deal", _deal["default"]); // eslint-disable-next-line no-console

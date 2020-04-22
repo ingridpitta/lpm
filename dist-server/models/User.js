@@ -9,6 +9,8 @@ exports["default"] = void 0;
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
+var _mongooseFindorcreate = _interopRequireDefault(require("mongoose-findorcreate"));
+
 var Schema = _mongoose["default"].Schema;
 var userSchema = new Schema({
   facebookId: {
@@ -34,7 +36,7 @@ var userSchema = new Schema({
   },
   image: {
     type: String,
-    "default": 'http://placehold.it/120x120&text=image1'
+    "default": "http://placehold.it/120x120&text=image1"
   },
   rating: {
     type: Number,
@@ -46,8 +48,9 @@ var userSchema = new Schema({
     "default": true
   }
 });
+userSchema.plugin(_mongooseFindorcreate["default"]);
 
-var User = _mongoose["default"].model('User', userSchema);
+var User = _mongoose["default"].model("User", userSchema);
 
 var _default = User;
 exports["default"] = _default;
