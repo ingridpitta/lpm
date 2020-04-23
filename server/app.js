@@ -28,7 +28,7 @@ const app = express();
 // DB Connection
 mongoose
   .connect(
-    process.env.MONGOBD_URI,
+    process.env.MONGODB_URI,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

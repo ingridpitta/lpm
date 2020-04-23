@@ -5,33 +5,28 @@
         <h1 class="center green-text"><i class="large material-icons">check</i></h1>
         <h3>Legal! Seu cadastro foi efetuado com sucesso.</h3>
         <p>E que tal, antes de continuarmos, você subir uma foto sua? <br> É importante para a segurança e confiança.</p>
-        
+        {{#if errorMessage}}
+        <div>
+          <p class="error-message">{{errorMessage}}</p>
+        </div>
+        {{/if}}
         <div class="row">
-          <form action="" method="POST">
-
+          <form action="/auth/signup/photo/{{id}}" method="POST" enctype="multipart/form-data">
             <div>
               <div id="main-cropper"></div>
               <a class="btn btn-block waves-effect waves-light action-upload">
-                <span>Buscar foto</span>
-                <input type="file" id="upload" value="Choose Image" accept="image/*">
+                <span id="upload">Buscar foto</span>
+                <span class="action-done">Buscar nova foto</span>
+                <input type="file" name="photo" value="Escolha a imagem" accept="image/*">
               </a>
-              <a id="action-new-upload" class="btn btn-block waves-effect waves-light action-done">
-                <span>Buscar nova foto</span>
-                <input type="file" id="upload" value="Choose Image" accept="image/*">
-              </a>
-              <button class="btn btn-block waves-effect waves-light action-done" type="submit">Continuar</button>
-
+              <button class="btn btn-block waves-effect waves-light action-done" type="submit" value="SAVE">Continuar</button>
             </div>
-
-            <div>
-              <h6><a href="/auth/signup-step">Continuar sem foto</a></h6>
-            </div>
-
           </form>
+          <div>
+            <h6><a href="/auth/signup-step">Continuar sem foto</a></h6>
+          </div>
         </div>
-
-      </div>
-        
+      </div> 
     </div>
   </div>
 </div>

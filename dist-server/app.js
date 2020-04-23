@@ -47,7 +47,7 @@ _dotenv["default"].config();
 
 var app = (0, _express["default"])(); // DB Connection
 
-_mongoose["default"].connect(process.env.MONGOBD_URI, {
+_mongoose["default"].connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }) // eslint-disable-next-line no-console

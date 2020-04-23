@@ -19,6 +19,8 @@ var _passport = _interopRequireDefault(require("passport"));
 
 var _User = _interopRequireDefault(require("../../models/User"));
 
+var _cloudinary = _interopRequireDefault(require("../../public/js/cloudinary"));
+
 var router = _express["default"].Router(); // Signup
 
 
@@ -54,17 +56,18 @@ router.post('/signup', /*#__PURE__*/function () {
 
           case 6:
             // res.redirect(307, '/auth/login');
-            console.log('PASSSOu');
-            res.render('private/signup-step');
-            _context.next = 19;
+            res.render('private/signup-step', {
+              id: newUser._id
+            });
+            _context.next = 18;
             break;
 
-          case 10:
-            _context.prev = 10;
+          case 9:
+            _context.prev = 9;
             _context.t0 = _context["catch"](0);
 
             if (!_context.t0.message.includes('required')) {
-              _context.next = 15;
+              _context.next = 14;
               break;
             }
 
@@ -73,9 +76,9 @@ router.post('/signup', /*#__PURE__*/function () {
             });
             return _context.abrupt("return");
 
-          case 15:
+          case 14:
             if (!_context.t0.message.includes('email')) {
-              _context.next = 18;
+              _context.next = 17;
               break;
             }
 
@@ -84,23 +87,63 @@ router.post('/signup', /*#__PURE__*/function () {
             });
             return _context.abrupt("return");
 
-          case 18:
+          case 17:
             if (_context.t0.message.includes('username')) {
               res.render('public/signup', {
                 errorMessage: 'Nome de usuário já cadastrado. Por favor escolha outro nome de usuário'
               });
             }
 
-          case 19:
+          case 18:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 10]]);
+    }, _callee, null, [[0, 9]]);
   }));
 
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
+  };
+}());
+router.post('/signup/photo/:id', _cloudinary["default"].single('photo'), /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
+    var url, id;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            url = req.file.url;
+            id = req.params.id;
+            _context2.next = 5;
+            return _User["default"].findByIdAndUpdate(id, {
+              image: url
+            });
+
+          case 5:
+            res.render('private/goal');
+            _context2.next = 12;
+            break;
+
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            res.render('private/signup-step', {
+              errorMessage: 'Houve um problema em salvar sua foto. Tente novamente mais tarde'
+            });
+            console.log(_context2.t0.message);
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 8]]);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
   };
 }()); // Login
 
