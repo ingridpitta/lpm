@@ -1,3 +1,50 @@
+/* eslint-disable camelcase */
+// Getting User Location [Origin]
+const displayLocationInfo = async position => {
+  const lng = await position.coords.longitude;
+  const lat = await position.coords.latitude;
+
+  console.log(`longitude: ${lng} | latitude: ${lat}`);
+  return [lat, lng];
+};
+
+const navigatorObject = window.navigator;
+
+if (navigatorObject.geolocation) {
+  navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
+}
+
+const calculateDistance = async destination => {
+  let user_origin;
+  if (navigatorObject.geolocation) {
+    const latlng = await displayLocationInfo();
+    user_origin = await navigatorObject.geolocation.getCurrentPosition(latlng);
+  }
+
+  console.log({ origin: user_origin });
+  const service = new google.maps.DistanceMatrixService();
+  if (!user_origin) {
+    service.getDistanceMatrix(
+      {
+        origins: ["-46.738349299999996,-23.6215512"],
+        destinations: [...destination],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC
+      },
+      (response, status) => {
+        if (status !== "OK") {
+          console.log(`Error: ${status}`);
+        } else {
+          const originList = response.originAddresses;
+          const destinationList = response.destinationAddresses;
+
+          return { originList, destinationList };
+        }
+      }
+    );
+  }
+};
+
 const BASE_URL = "http://localhost:3001";
 const api = axios.create({
   baseURL: BASE_URL
@@ -23,6 +70,11 @@ const getTravels = async () => {
             space,
             price
           } = tr;
+
+          // const travel_origin = tr.origin;
+
+          // const distances = await calculateDistance(travel_origin);
+          // console.log({ travelDistances: distances });
 
           content += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
@@ -73,7 +125,7 @@ const getObjects = async () => {
 
       if (data.length) {
         console.log({ data });
-        data.map(tr => {
+        data.map(obj => {
           const {
             description,
             origin,
@@ -82,7 +134,12 @@ const getObjects = async () => {
             arrival,
             size,
             price
-          } = tr;
+          } = obj;
+
+          // const object_origin = obj.origin;
+
+          // const distances = await calculateDistance(object_origin);
+          // console.log({ objectDistances: distances });
 
           content += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
@@ -122,20 +179,6 @@ const getObjects = async () => {
 };
 
 getObjects();
-
-// Getting User Location [Origin]
-const displayLocationInfo = position => {
-  const lng = position.coords.longitude;
-  const lat = position.coords.latitude;
-
-  console.log(`longitude: ${lng} | latitude: ${lat}`);
-};
-
-const navigatorObject = window.navigator;
-
-if (navigatorObject.geolocation) {
-  navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
-}
 
 // Getting Objects Locations [Destination]
 const objectsLocations = () => {
