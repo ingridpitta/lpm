@@ -2,15 +2,13 @@
     <div class="nav-wrapper container">
         <a id="logo-container" href="/" class="brand-logo">Leva Pra Mim</a>
         <ul class="right hide-on-med-and-down">
-            <li><a class="btn" href="registerTravel">Vou viajar</a></li>
-            <li><a class="btn" href="registerObject">Cadastrar Objeto</a></li>
             <li><a href="">Meus Dados</a></li>
-            <li><a href="">Logout</a></li>
+            <li><a class="btn btn-dash" href="registerTravel">Vou viajar</a></li>
+            <li><a class="btn btn-dash" href="registerObject">Cadastrar Objeto</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
             <li><a href="auth/login">Meus Dados</a></li>
-            <li><a href="auth/signup">Logout</a></li>
             <li><a href="registerTravel">Vou Viajar</a></li>
             <li><a href="registerObject">Cadastrar Objeto</a></li>
         </ul>
@@ -21,47 +19,43 @@
 <section class="dashboard">
     <div>
         <div class="row">
-            <div class="col offset-l1 l10 offset-m2 m8 offset-s1 s10 filter">
-                <h5>Olá! Bem-vind@ {{user.name}}!</h5>
+            <div class="intro col offset-l1 l10 offset-m2 m8 offset-s1 s10 filter">
+                <h5>Olá! Bem-vind@ {{user.name}}</h5>
                 <p>Deseja filtrar a listagem abaixo? <a class="modal-trigger" href="#modal1">Acesse aqui</a></p>
-                <hr>
-                </hr>
             </div>
         </div>
         <div class="row">
             <div class="col offset-l1 l10 offset-m2 m8 offset-s1 s10">
                 <ul class="tabs">
                     <li class="tab col s4"><a class="active" href="#travel-object">Tudo</a></li>
-                    <li class="tab col s4"><a href="#object">Viagens</a></li>
-                    <li class="tab col s4"><a href="#travel">Objetos</a></li>
+                    <li class="tab col s4"><a href="#object">Objetos</a></li>
+                    <li class="tab col s4"><a href="#travel">Viagens</a></li>
                 </ul>
             </div>
-            <div class="content col offset-l1 l10 offset-m2 m8 offset-s1 s10">
+            <div class="content">
                 <div id="travel-object" class="col s12">Tudo</div>
+                <div id="travel" class="col l12 m12 s12"></div>
                 <div id="object" class="col s12"></div>
-                <div id="travel" class="col s12"></div>
+                <!-- Modal Structure -->
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Selecione os filtros abaixo</h4>
+                        <p>Filtros</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!-- Modal Structure -->
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <h4>Selecione os filtros abaixo</h4>
-                <p>Filtros</p>
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating red"><i class="material-icons">directions_car</i></a></li>
+                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">present_to_all</i></a></li>
+                </ul>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-            </div>
-        </div>
-    </div>
-    <div class="fixed-action-btn">
-        <a class="btn-floating btn-large">
-            <i class="large material-icons">mode_edit</i>
-        </a>
-        <ul>
-            <li><a class="btn-floating red"><i class="material-icons">directions_car</i></a></li>
-            <li><a class="btn-floating yellow darken-1"><i class="material-icons">present_to_all</i></a></li>
-        </ul>
-    </div>
 </section>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

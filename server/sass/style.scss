@@ -19,29 +19,39 @@ body {
   font-size: 16px;
 }
 
- nav ul a,
- nav .brand-logo {
-   color: black;
- }
+nav ul a,
+nav .brand-logo {
+  color: black;
+}
 
- h1 {
-   font-size: 3.5em;
- }
+h1 {
+  font-size: 3.5em;
+}
 
- h5 {
-  line-height: 1.5em;
+h5 {
+ line-height: 1.5em;
 }
  
- p {
-   line-height: 2rem;
- }
+p {
+  line-height: 2rem;
+}
 
- button {
-   font-family: 'Barlow', sans-serif;
- }
+button {
+  font-family: 'Barlow', sans-serif;
+}
 
 .btn-block {
   width: 100%;
+}
+
+.btn-dash {
+  margin-right: 0 !important; 
+}
+ 
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 82%;
 }
 
 .input-field {
@@ -61,6 +71,18 @@ input[type="file"] {
 .action-done {
   display: none;
   margin-top: 24px;
+}
+
+.intro {
+  display: flex;
+  justify-content: space-between;
+}
+
+.center-cols > .col {
+  margin-top: 48px;
+  float: none; /* disable the float */
+  display: inline-block; /* make blocks inline-block */
+  text-align: initial; /* restore text-align to default */
 }
 
  .sidenav-trigger {
@@ -96,25 +118,41 @@ input[type="file"] {
     margin-top: 60px;
   }
 
-.dashboard hr {
-  margin-top: 44px;
-  margin-bottom: 20px;
-}
-
-hr {
-  border-top: 1px solid #ccc;
-}
-
 .content {
   margin-top: 60px;
 }
 
-  .tabs .tab a{
-    color:#000;
+// CARD STYLES
+
+.card-subtitle {
+  font-size: 0.7em;
+}
+
+//
+
+.vl {
+  border-left: 1px solid #efefef;
+  height: 60px;
+  margin: 5px;
+}
+
+// TABS STYLES
+
+.tabs {
+  border-bottom: lightgrey 1px solid;
+}
+
+.tab {
+  height: 80px !important;
+}
+
+.tabs .tab a{
+  color:#000;
+  // text-transform: none !important;
 } 
 
 .tabs .tab a:hover {
-    color: $secondary-color;
+  color: $secondary-color;
 } 
 
 .tabs .tab a.active {
@@ -122,20 +160,41 @@ hr {
 } 
 
 .tabs .indicator {
-    background-color: $secondary-color;
+  background-color: $secondary-color;
+}
+
+// END TAB STYLES
+ 
+.icon-block {
+  padding: 0 15px;
+}
+
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+footer.page-footer {
+  margin: 0;
 }
  
  @media only screen and (max-width : 992px) {
-   .parallax-container .section {
+   
+  .parallax-container .section {
      position: absolute;
      top: 40%;
    }
+
    #index-banner .section {
      top: 10%;
    }
+
    nav .brand-logo {
      font-size: 1.5em;
    }
+
+   .intro {
+    display: block;
+  }
 
  }
  
@@ -144,16 +203,8 @@ hr {
   #index-banner .section {
      top: 0;
    }
+
  }
- 
- .icon-block {
-   padding: 0 15px;
- }
- .icon-block .material-icons {
-   font-size: inherit;
- }
- 
- footer.page-footer {
-   margin: 0;
- }
+
+
  

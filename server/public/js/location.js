@@ -8,7 +8,7 @@ const getTravels = async () => {
     .get("/travels")
     .then(res => {
       const { data } = res;
-      const divTravel = document.getElementById("object");
+      const divTravel = document.getElementById("travel");
       let content = "";
 
       if (data.length) {
@@ -24,13 +24,34 @@ const getTravels = async () => {
             price
           } = tr;
 
-          content += `<div class="travel--container"><h3>${description}</h3>
-          <h3 class="travel--origin">${origin}</h3>
-          <h3>${destination}</h3>
-          <h3>${departure}</h3>
-          <h3>${arrival}</h3>
-          <h3>${space}</h3>
-          <h3>${price}</h3></div>`;
+          content += `<div class="row center-cols center-align">
+                    <div class="col l3 m4 s10">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="../../images/dashboard/dark-map.png">
+                          <div class="card-title">
+                            <div class="card-subtitle">Partida em ${departure}</div>
+                            <div class="travel--origin">${origin}</div>
+                            <div class="vl"></div>
+                            <div class="card-subtitle">Chegada em ${arrival}</div>
+                            <div class="travel--destination">${destination}</div>
+                          </div>
+                        </div>
+                        <div class="card-content">
+                          <p>${description}</p>
+                        </div>
+                        <div class="card-content">
+                          <p>${space}</p>
+                        </div>
+                        <div class="card-content">
+                          <p>${price}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">Entre em contato</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
         });
       } else {
         content += "<div><h2>Nenhuma viagem cadastrada</h2></div>";
@@ -47,7 +68,7 @@ const getObjects = async () => {
     .get("/objects")
     .then(res => {
       const { data } = res;
-      const divObject = document.getElementById("travel");
+      const divObject = document.getElementById("object");
       let content = "";
 
       if (data.length) {
@@ -63,13 +84,34 @@ const getObjects = async () => {
             price
           } = tr;
 
-          content += `<div class="object--container"><h3>${description}</h3>
-          <h3 class="object--origin">${origin}</h3>
-          <h3>${destination}</h3>
-          <h3>${departure}</h3>
-          <h3>${arrival}</h3>
-          <h3>${size}</h3>
-          <h3>${price}</h3></div>`;
+          content += `<div class="row center-cols center-align">
+                    <div class="col l3 m4 s10">
+                      <div class="card">
+                        <div class="card-image">
+                          <img src="../../images/dashboard/dark-map.png">
+                          <div class="card-title">
+                            <div class="card-subtitle">Partida em ${departure}</div>
+                            <div class="object--origin">${origin}</div>
+                            <div class="vl"></div>
+                            <div class="card-subtitle">Chegada em ${arrival}</div>
+                            <div class="object--destination">${destination}</div>
+                          </div>
+                        </div>
+                        <div class="card-content">
+                          <p>${description}</p>
+                        </div>
+                        <div class="card-content">
+                          <p>${size}</p>
+                        </div>
+                        <div class="card-content">
+                          <p>${price}</p>
+                        </div>
+                        <div class="card-action">
+                          <a href="#">Entre em contato</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>`;
         });
       } else {
         content += "<div><h2>Nenhum objeto cadastrado</h2></div>";
