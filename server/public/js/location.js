@@ -1,9 +1,17 @@
+const BASE_URL = "http://localhost:3001";
+const api = axios.create({
+  baseURL: BASE_URL
+});
+
 // Getting User Location [Origin]
-const displayLocationInfo = position => {
+const displayLocationInfo = async position => {
   const lng = position.coords.longitude;
   const lat = position.coords.latitude;
 
+  const result = await api.get("/registerObject/objects");
+
   console.log(`longitude: ${lng} | latitude: ${lat}`);
+  console.log({ result });
 };
 
 const navigatorObject = window.navigator;
