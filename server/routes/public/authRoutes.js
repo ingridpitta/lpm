@@ -1,7 +1,8 @@
-import express from "express";
-import bcrypt from "bcrypt";
-import passport from "passport";
-import User from "../../models/User";
+import express from 'express';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import User from '../../models/User';
+import uploadCloud from '../../public/js/cloudinary';
 
 const router = express.Router();
 
@@ -29,7 +30,8 @@ router.post("/signup", async (req, res) => {
       email
     });
     await newUser.save();
-    res.render("private/signup-step");
+    // res.redirect(307, '/auth/login');
+    res.render('private/signup-step', { id: newUser._id });
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
@@ -53,6 +55,23 @@ router.post("/signup", async (req, res) => {
     }
   }
 });
+
+router.post('/signup/photo/:id', uploadCloud.single('photo'), async (req, res) => {
+  try {
+    const { url } = req.file;
+    const { id } = req.params;
+    await User.findByIdAndUpdate(id, { image: url });
+    res.redirect('/auth/signup/goal');
+  } catch (error) {
+    res.render('private/signup-step', { errorMessage: 'Houve um problema em salvar sua foto. Tente novamente mais tarde' });
+    console.log(error.message);
+  }
+});
+
+router.get('/signup/goal', (req, res) => {
+  res.render('private/goal');
+});
+
 
 // Login
 router.get("/login", (req, res) => {
