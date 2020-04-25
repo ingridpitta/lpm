@@ -19,31 +19,38 @@
         <h3>Faça o login</h3>
 
         <div class="row">
-          <button class="btn btn-block waves-effect waves-light blue darken-4" type="submit">Entre com Facebook</button>
+          <a href="/auth/facebook">
+            <button class="btn btn-block waves-effect waves-light blue darken-4" type="submit">Entre com
+              Facebook</button>
+          </a>
         </div>
 
         <div class="row">
           <p>ou coloque os dados abaixo para entrar<p>
-          <form action="" method="POST">
+              <form action="/auth/login" method="POST">
+                {{#if errorMessage}}
+                <div>
+                  <p class="error-message">{{errorMessage}}</p>
+                </div>
+                {{/if}}
+                <div class="input-field">
+                  {{!-- <i class="material-icons prefix">account_circle</i> --}}
+                  <input name="username" id="username" type="text" class="validate">
+                  <label for="username">Username</label>
+                </div>
 
-              <div class="input-field">
-                {{!-- <i class="material-icons prefix">account_circle</i> --}}
-                <input id="username" type="text" class="validate">
-                <label for="username">Username</label>
-              </div>
+                <div class="input-field">
+                  {{!-- <i class="material-icons prefix">https</i> --}}
+                  <input name="password" id="password" type="password" class="validate">
+                  <label for="password">Password</label>
+                </div>
 
-              <div class="input-field">
-                {{!-- <i class="material-icons prefix">https</i> --}}
-                <input id="password" type="password" class="validate">
-                <label for="password">Password</label>
-              </div>
+                <button id="submit--login" class="btn btn-block waves-effect waves-light" type="submit">Entrar</button>
 
-            <button class="btn btn-block waves-effect waves-light" type="submit">Entrar</button>
-
-          </form>
+              </form>
         </div>
       </div>
-        
+
     </div>
   </div>
 </div>
@@ -52,3 +59,4 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
 <script src="../../js/init.js"></script>
+<script src="../../js/login.js"></script>

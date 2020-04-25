@@ -24,10 +24,10 @@ var _cloudinary = _interopRequireDefault(require("../../public/js/cloudinary"));
 var router = _express["default"].Router(); // Signup
 
 
-router.get('/signup', function (req, res) {
-  res.render('public/signup');
+router.get("/signup", function (req, res) {
+  res.render("public/signup");
 });
-router.post('/signup', /*#__PURE__*/function () {
+router.post("/signup", /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var _req$body, name, username, password, email, hashPassword, saltRouds, salt, newUser;
 
@@ -66,31 +66,31 @@ router.post('/signup', /*#__PURE__*/function () {
             _context.prev = 9;
             _context.t0 = _context["catch"](0);
 
-            if (!_context.t0.message.includes('required')) {
+            if (!_context.t0.message.includes("required")) {
               _context.next = 14;
               break;
             }
 
-            res.render('public/signup', {
-              errorMessage: 'Email já cadastrado. Por favor insira outro email'
+            res.render("public/signup", {
+              errorMessage: "Email já cadastrado. Por favor insira outro email"
             });
             return _context.abrupt("return");
 
           case 14:
-            if (!_context.t0.message.includes('email')) {
+            if (!_context.t0.message.includes("email")) {
               _context.next = 17;
               break;
             }
 
-            res.render('public/signup', {
-              errorMessage: 'Email já cadastrado. Por favor insira outro email'
+            res.render("public/signup", {
+              errorMessage: "Email já cadastrado. Por favor insira outro email"
             });
             return _context.abrupt("return");
 
           case 17:
-            if (_context.t0.message.includes('username')) {
-              res.render('public/signup', {
-                errorMessage: 'Nome de usuário já cadastrado. Por favor escolha outro nome de usuário'
+            if (_context.t0.message.includes("username")) {
+              res.render("public/signup", {
+                errorMessage: "Nome de usuário já cadastrado. Por favor escolha outro nome de usuário"
               });
             }
 
@@ -122,7 +122,7 @@ router.post('/signup/photo/:id', _cloudinary["default"].single('photo'), /*#__PU
             });
 
           case 5:
-            res.render('private/goal');
+            res.redirect('/auth/signup/goal');
             _context2.next = 12;
             break;
 
@@ -145,23 +145,33 @@ router.post('/signup/photo/:id', _cloudinary["default"].single('photo'), /*#__PU
   return function (_x3, _x4) {
     return _ref2.apply(this, arguments);
   };
-}()); // Login
+}());
+router.get('/signup/goal', function (req, res) {
+  res.render('private/goal');
+}); // Login
 
-router.get('/login', function (req, res) {
-  res.render('public/login', {
-    errorMessage: req.flash('error')
+router.get("/login", function (req, res) {
+  res.render("public/login", {
+    errorMessage: req.flash("error")
   });
 });
-router.post('/login', _passport["default"].authenticate('local', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/auth/login',
+router.post("/login", _passport["default"].authenticate("local", {
+  successRedirect: "/dashboard",
+  failureRedirect: "/auth/login",
   failureFlash: true,
   passReqToCallback: true
-})); // Logout
+})); // Facebook Login
 
-router.get('/logout', function (req, res) {
+router.get("/facebook", _passport["default"].authenticate("facebook"));
+router.get("/facebook/callback", _passport["default"].authenticate("facebook", {
+  failureRedirect: "/auth/login"
+}), function (req, res) {
+  res.redirect("/dashboard");
+}); // Logout
+
+router.get("/logout", function (req, res) {
   req.logout();
-  res.redirect('/auth/login');
+  res.redirect("/auth/login");
 });
 var _default = router;
 exports["default"] = _default;

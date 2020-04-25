@@ -19,36 +19,39 @@
         <h3>Cadastre-se</h3>
 
         <div class="row">
-          <button class="btn btn-block waves-effect waves-light blue darken-4" type="submit">Cadastre-se com Facebook</button>
+          <a href="/auth/facebook">
+            <button class="btn btn-block waves-effect waves-light blue darken-4" type="submit">Cadastre-se com
+              Facebook</button>
+          </a>
         </div>
 
         <div class="row">
           <p>ou coloque os dados abaixo para efetuar o cadastro</p>
           <form action="/auth/signup" method="POST">
-              {{#if errorMessage}}
-              <div>
-                <p class="error-message">{{errorMessage}}</p>
-              </div>
-              {{/if}}
-              <div class="input-field">
-                <input id="name" name="name" type="text" class="validate">
-                <label for="name">Seu nome</label>
-              </div>
+            {{#if errorMessage}}
+            <div>
+              <p class="error-message">{{errorMessage}}</p>
+            </div>
+            {{/if}}
+            <div class="input-field">
+              <input id="name" name="name" type="text" class="validate">
+              <label for="name">Seu nome</label>
+            </div>
 
-              <div class="input-field">
-                <input id="email" name="email" type="email" class="validate">
-                <label for="email">Seu e-mail</label>
-              </div>
+            <div class="input-field">
+              <input id="email" name="email" type="email" class="validate">
+              <label for="email">Seu e-mail</label>
+            </div>
 
-              <div class="input-field">
-                <input id="username" name="username" type="text" class="validate">
-                <label for="username">Escolha um nome de usuário</label>
-              </div>
+            <div class="input-field">
+              <input id="username" name="username" type="text" class="validate">
+              <label for="username">Escolha um nome de usuário</label>
+            </div>
 
-              <div class="input-field">
-                <input id="password" name="password" type="password" class="validate">
-                <label for="password">Escolha uma senha</label>
-              </div>
+            <div class="input-field">
+              <input id="password" name="password" type="password" class="validate">
+              <label for="password">Escolha uma senha</label>
+            </div>
 
             <button class="btn btn-block waves-effect waves-light" type="submit">Cadastrar</button>
 
@@ -56,7 +59,7 @@
         </div>
 
       </div>
-        
+
     </div>
   </div>
 </div>
