@@ -22,6 +22,7 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
+    "@babel/runtime": "^7.9.2",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.21.0",
@@ -58,7 +59,8 @@
     "ignore": [
       "./server/public/js/materialize.js",
       "./server/public/js/materialize.min.js",
-      "./server/public/js/editImageSignUp.js"
+      "./server/public/js/editImageSignUp.js",
+      "./server/public/js/location.js"
     ],
     "plugins": [
       [

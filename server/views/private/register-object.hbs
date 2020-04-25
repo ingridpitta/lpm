@@ -1,1 +1,59 @@
-<h1>REGISTER OBJECT</h1>
+<div class="container auth">
+    <div class="section">
+        <div class="row center">
+            <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                <h3>Registre um Objeto</h3>
+
+                <div class="row">
+                    <p>Insira os Dados do Objeto</p>
+                    <form action="registerObject" method="POST">
+                        <div class="input-field">
+                            <input id="origin" name="origin" type="text" class="validate">
+                            <label for="origin">Origem</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="destination" name="destination" type="text" class="validate">
+                            <label for="destination">Destino</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="departure" name="departure" type="date" class="validate">
+                            <label for="departure">Partida</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="arrival" name="arrival" type="date" class="validate">
+                            <label for="arrival">Chegada</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="description" name="description" type="text" class="validate">
+                            <label for="description">Descrição</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="size" name="size" type="text" class="validate">
+                            <label for="size">Tamanho</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input id="price" name="price" type="text" class="validate">
+                            <label for="price">Preço</label>
+                        </div>
+
+                        <button class="btn btn-block waves-effect waves-light" type="submit">Cadastrar</button>
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../../js/materialize.js"></script>
+<script src="../../js/init.js"></script>

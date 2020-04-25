@@ -2,8 +2,8 @@
   <div class="nav-wrapper container">
     <a id="logo-container" href="/" class="brand-logo">Leva Pra Mim</a>
     <ul class="right hide-on-med-and-down">
-      <li><a class="btn" href="">Vou viajar</a></li>
-      <li><a class="btn" href="">Cadastrar Objeto</a></li>
+      <li><a class="btn" href="registerTravel">Vou viajar</a></li>
+      <li><a class="btn" href="registerObject">Cadastrar Objeto</a></li>
       <li><a href="">Meus Dados</a></li>
       <li><a href="">Logout</a></li>
     </ul>
@@ -11,8 +11,8 @@
     <ul id="nav-mobile" class="sidenav">
       <li><a href="auth/login">Meus Dados</a></li>
       <li><a href="auth/signup">Logout</a></li>
-      <li><a href="auth/signup">Vou Viajar</a></li>
-      <li><a href="auth/signup">Cadastrar Objeto</a></li>
+      <li><a href="registerTravel">Vou Viajar</a></li>
+      <li><a href="registerObject">Cadastrar Objeto</a></li>
     </ul>
     <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>
@@ -37,8 +37,44 @@
       </div>
       <div class="content col offset-l1 l10 offset-m2 m8 offset-s1 s10">
         <div id="travel-object" class="col s12">Tudo</div>
-        <div id="object" class="col s12">Viagens</div>
-        <div id="travel" class="col s12">Objeto</div>
+        <div id="object" class="col s12">
+          {{#if travel}}
+            {{#each travel}}
+              <div>
+                <h3>{{this.description}}</h3>
+                <h3 class="travel--origin">{{this.origin}}</h3>
+                <h3>{{this.destination}}</h3>
+                <h3>{{this.departure}}</h3>
+                <h3>{{this.arrival}}</h3>
+                <h3>{{this.space}}</h3>
+                <h3>{{this.price}}</h3>
+              </div>
+            {{/each}}
+          {{else}}
+            <div>
+              <h2>Nenhuma viagem cadastrada</h2>
+            </div>
+          {{/if}}
+        </div>
+        <div id="travel" class="col s12">
+          {{#if object}}
+            {{#each object}}
+              <div>
+                <h3>{{this.description}}</h3>
+                <p class="object--origin">{{this.origin}}</p>
+                <p>{{this.destination}}</p>
+                <p>{{this.departure}}</p>
+                <p>{{this.arrival}}</p>
+                <p>{{this.size}}</p>
+                <p>{{this.price}}</p>
+              </div>
+            {{/each}}
+          {{else}}
+            <div>
+              <h2>Nenhum objeto cadastrado</h2>
+            </div>
+          {{/if}}
+        </div>
       </div>
     </div>
     <!-- Modal Structure -->
@@ -63,10 +99,12 @@
 </div>
 </section>
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvAW-8hwHHViHvPBUFQTbLUuJzG89kbYw"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
 <script src="../../js/init.js"></script>
+<script src="../../js/location.js"></script>
+
 <script>
   $(document).ready(function(){
     $('.tabs').tabs();
