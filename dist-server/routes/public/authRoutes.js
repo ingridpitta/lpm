@@ -19,6 +19,8 @@ var _passport = _interopRequireDefault(require("passport"));
 
 var _User = _interopRequireDefault(require("../../models/User"));
 
+var _cloudinary = _interopRequireDefault(require("../../public/js/cloudinary"));
+
 var router = _express["default"].Router(); // Signup
 
 
@@ -53,7 +55,10 @@ router.post("/signup", /*#__PURE__*/function () {
             return newUser.save();
 
           case 6:
-            res.render("private/signup-step");
+            // res.redirect(307, '/auth/login');
+            res.render('private/signup-step', {
+              id: newUser._id
+            });
             _context.next = 18;
             break;
 
@@ -100,7 +105,50 @@ router.post("/signup", /*#__PURE__*/function () {
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
   };
-}()); // Login
+}());
+router.post('/signup/photo/:id', _cloudinary["default"].single('photo'), /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
+    var url, id;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            url = req.file.url;
+            id = req.params.id;
+            _context2.next = 5;
+            return _User["default"].findByIdAndUpdate(id, {
+              image: url
+            });
+
+          case 5:
+            res.redirect('/auth/signup/goal');
+            _context2.next = 12;
+            break;
+
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            res.render('private/signup-step', {
+              errorMessage: 'Houve um problema em salvar sua foto. Tente novamente mais tarde'
+            });
+            console.log(_context2.t0.message);
+
+          case 12:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[0, 8]]);
+  }));
+
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}());
+router.get('/signup/goal', function (req, res) {
+  res.render('private/goal');
+}); // Login
 
 router.get("/login", function (req, res) {
   res.render("public/login", {
