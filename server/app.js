@@ -19,7 +19,9 @@ import chat from "./routes/private/chat";
 import dashboard from "./routes/private/dashboard";
 import profileInfos from "./routes/private/profileInfos";
 import registerObject from "./routes/private/registerObject";
+import objects from "./routes/private/objects";
 import registerTravel from "./routes/private/registerTravel";
+import travels from "./routes/private/travels";
 import deal from "./routes/private/deal";
 
 dotenv.config();
@@ -164,7 +166,9 @@ app.use("/chat", chat);
 app.use("/dashboard", dashboard);
 app.use("/profile", profileInfos);
 app.use("/registerObject", registerObject);
+app.use("/objects", objects);
 app.use("/registerTravel", registerTravel);
+app.use("/travels", travels);
 app.use("/deal", deal);
 
 // eslint-disable-next-line no-console

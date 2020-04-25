@@ -3,15 +3,23 @@ const api = axios.create({
   baseURL: BASE_URL
 });
 
+// Show data (tests)
+
+const test = async () => {
+  const objects = await api.get("/objects");
+  const travels = await api.get("/travels");
+
+  console.log({ objects, travels });
+};
+
+test();
+
 // Getting User Location [Origin]
-const displayLocationInfo = async position => {
+const displayLocationInfo = position => {
   const lng = position.coords.longitude;
   const lat = position.coords.latitude;
 
-  const result = await api.get("/registerObject/objects");
-
   console.log(`longitude: ${lng} | latitude: ${lat}`);
-  console.log({ result });
 };
 
 const navigatorObject = window.navigator;

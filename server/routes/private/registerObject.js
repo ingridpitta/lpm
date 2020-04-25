@@ -11,63 +11,6 @@ router.get("/", (req, res) => {
   res.render("private/register-object");
 });
 
-// For axios - list objects
-router.get("/objects", async (req, res) => {
-  try {
-    const objects = await UserObject.find();
-
-    res.status(200).json(objects);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
-
-// For axios - find one object
-router.post("/objects/:id", async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const objects = await UserObject.findOne({ _id: id });
-
-    res.status(200).json(objects);
-  } catch (err) {
-    throw new Error(err);
-  }
-});
-
-// For axios - update object
-router.post("/objects/update/:id", async (req, res) => {
-  const { id } = req.params;
-  const {
-    origin,
-    destination,
-    departure,
-    arrival,
-    description,
-    size,
-    price
-  } = req.body;
-
-  try {
-    await UserObject.updateOne(
-      { _id: id },
-      {
-        origin,
-        destination,
-        departure,
-        arrival,
-        description,
-        size,
-        price
-      }
-    );
-
-    res.status(200).json({ message: "OK" });
-  } catch (err) {
-    throw new Error(err);
-  }
-});
-
 router.post("/", (req, res) => {
   const {
     origin,
@@ -112,4 +55,5 @@ router.get("/detail/:id", async (req, res) => {
     throw new Error(error);
   }
 });
+
 export default router;
