@@ -64,7 +64,7 @@ const getObjects = async () => {
           } = tr;
 
           content += `<div class="object--container"><h3>${description}</h3>
-          <h3 class="travel--origin">${origin}</h3>
+          <h3 class="object--origin">${origin}</h3>
           <h3>${destination}</h3>
           <h3>${departure}</h3>
           <h3>${arrival}</h3>
