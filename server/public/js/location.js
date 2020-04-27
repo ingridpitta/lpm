@@ -1,49 +1,7 @@
 /* eslint-disable camelcase */
 // Getting User Location [Origin]
-const displayLocationInfo = async position => {
-  const lng = await position.coords.longitude;
-  const lat = await position.coords.latitude;
-
-  console.log(`longitude: ${lng} | latitude: ${lat}`);
-  return [lat, lng];
-};
-
-const navigatorObject = window.navigator;
-
-if (navigatorObject.geolocation) {
-  navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
-}
-
-const calculateDistance = async destination => {
-  let user_origin;
-  if (navigatorObject.geolocation) {
-    const latlng = await displayLocationInfo();
-    user_origin = await navigatorObject.geolocation.getCurrentPosition(latlng);
-  }
-
-  console.log({ origin: user_origin });
-  const service = new google.maps.DistanceMatrixService();
-  if (!user_origin) {
-    service.getDistanceMatrix(
-      {
-        origins: ["-46.738349299999996,-23.6215512"],
-        destinations: [...destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC
-      },
-      (response, status) => {
-        if (status !== "OK") {
-          console.log(`Error: ${status}`);
-        } else {
-          const originList = response.originAddresses;
-          const destinationList = response.destinationAddresses;
-
-          return { originList, destinationList };
-        }
-      }
-    );
-  }
-};
+let destination_obj = [];
+let destination_travel = [];
 
 const BASE_URL = "http://localhost:3001";
 const api = axios.create({
@@ -60,7 +18,7 @@ const getTravels = async () => {
 
       if (data.length) {
         console.log({ data });
-        data.map(tr => {
+        data.map(async tr => {
           const {
             description,
             origin,
@@ -71,10 +29,7 @@ const getTravels = async () => {
             price
           } = tr;
 
-          // const travel_origin = tr.origin;
-
-          // const distances = await calculateDistance(travel_origin);
-          // console.log({ travelDistances: distances });
+          destination_obj.push(tr.origin);
 
           content += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
@@ -136,10 +91,7 @@ const getObjects = async () => {
             price
           } = obj;
 
-          // const object_origin = obj.origin;
-
-          // const distances = await calculateDistance(object_origin);
-          // console.log({ objectDistances: distances });
+          destination_travel.push(obj.origin);
 
           content += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
@@ -179,6 +131,59 @@ const getObjects = async () => {
 };
 
 getObjects();
+
+const calculateDistance = async (
+  origin,
+  destination_objects,
+  destination_travels
+) => {
+  const user_origin = origin;
+
+  console.log({
+    origin: user_origin,
+    destination: [...destination_objects, ...destination_travels]
+  });
+  const service = new google.maps.DistanceMatrixService();
+  if (user_origin) {
+    service.getDistanceMatrix(
+      {
+        origins: [origin],
+        destinations: [...destination_objects, ...destination_travels],
+        travelMode: google.maps.TravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC
+      },
+      (response, status) => {
+        if (status !== "OK") {
+          console.log(`Error: ${status}`);
+        } else {
+          console.log({ response });
+          const originList = response.originAddresses;
+          const destinationList = response.destinationAddresses;
+          const rows = response.rows[0].elements.map(dist => dist.distance.value).sort((a,b) => a - b);
+
+         console.log({rows});
+        }
+      }
+    );
+  }
+};
+const displayLocationInfo = async position => {
+  const lng = await position.coords.longitude;
+  const lat = await position.coords.latitude;
+
+  console.log(`longitude: ${lng} | latitude: ${lat}`);
+  return calculateDistance(
+    `${lat}, ${lng}`,
+    destination_obj,
+    destination_travel
+  );
+};
+
+const navigatorObject = window.navigator;
+
+if (navigatorObject.geolocation) {
+  navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
+}
 
 // Getting Objects Locations [Destination]
 const objectsLocations = () => {
