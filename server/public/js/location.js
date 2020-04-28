@@ -8,138 +8,9 @@ const api = axios.create({
   baseURL: BASE_URL
 });
 
-// const getTravels = async () => {
-//   await api
-//     .get("/travels")
-//     .then(res => {
-//       const { data } = res;
-//       const divTravel = document.getElementById("travel");
-//       let content_tr = "";
-
-//       if (data.length) {
-//         console.log({ data });
-//         data.map(tr => {
-//           const {
-//             description,
-//             origin,
-//             destination,
-//             departure,
-//             arrival,
-//             space,
-//             price
-//           } = tr;
-
-//           destination_obj.push(tr.origin);
-
-//           content_tr += `<div class="row center-cols center-align">
-//                     <div class="col l3 m4 s10">
-//                       <div class="card">
-//                         <div class="card-image">
-//                           <img src="../../images/dashboard/dark-map.png">
-//                           <div class="card-title">
-//                             <div class="card-subtitle">Partida em ${departure}</div>
-//                             <div class="travel--origin">${origin}</div>
-//                             <div class="vl"></div>
-//                             <div class="card-subtitle">Chegada em ${arrival}</div>
-//                             <div class="travel--destination">${destination}</div>
-//                           </div>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${description}</p>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${space}</p>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${price}</p>
-//                         </div>
-//                         <div class="card-action">
-//                           <a href="#">Entre em contato</a>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>`;
-//         });
-//       } else {
-//         content_tr += "<div><h2>Nenhuma viagem cadastrada</h2></div>";
-//       }
-//       divTravel.innerHTML = content_tr;
-//     })
-//     .catch(err => console.log(err));
-// };
-
-// getTravels();
-
-// const getObjects = async () => {
-//   await api
-//     .get("/objects")
-//     .then(res => {
-//       const { data } = res;
-//       const divObject = document.getElementById("object");
-//       let content_obj = "";
-
-//       if (data.length) {
-//         console.log({ data });
-//         data.map(obj => {
-//           const {
-//             description,
-//             origin,
-//             destination,
-//             departure,
-//             arrival,
-//             size,
-//             price
-//           } = obj;
-
-//           destination_travel.push(obj.origin);
-
-//           content_obj += `<div class="row center-cols center-align">
-//                     <div class="col l3 m4 s10">
-//                       <div class="card">
-//                         <div class="card-image">
-//                           <img src="../../images/dashboard/dark-map.png">
-//                           <div class="card-title">
-//                             <div class="card-subtitle">Partida em ${departure}</div>
-//                             <div class="object--origin">${origin}</div>
-//                             <div class="vl"></div>
-//                             <div class="card-subtitle">Chegada em ${arrival}</div>
-//                             <div class="object--destination">${destination}</div>
-//                           </div>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${description}</p>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${size}</p>
-//                         </div>
-//                         <div class="card-content">
-//                           <p>${price}</p>
-//                         </div>
-//                         <div class="card-action">
-//                           <a href="#">Entre em contato</a>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>`;
-//         });
-//       } else {
-//         content_obj += "<div><h2>Nenhum objeto cadastrado</h2></div>";
-//       }
-//       divObject.innerHTML = content_obj;
-//     })
-//     .catch(err => console.log(err));
-// };
-
-// getObjects();
-
 const calculateDistance = async (org, destinations) => {
   const user_origin = org;
   const dest = destinations.map(x => x.origin);
-
-  // console.log({
-  //   origin: user_origin,
-  //   destination: [...dest]
-  // });
 
   const service = new google.maps.DistanceMatrixService();
   if (user_origin) {
@@ -183,7 +54,7 @@ const calculateDistance = async (org, destinations) => {
                   arrival,
                   size,
                   price
-                } = obj;
+                } = obj.data;
 
                 content_obj += `<div class="row center-cols center-align">
                                 <div class="col l3 m4 s10">
@@ -235,7 +106,7 @@ const calculateDistance = async (org, destinations) => {
                   arrival,
                   space,
                   price
-                } = tr;
+                } = tr.data;
 
                 content_tr += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
@@ -336,7 +207,7 @@ const displayLocationInfo = async position => {
   await obj_data();
   await tr_data();
 
-  console.log(`longitude: ${lng} | latitude: ${lat}`);
+  // console.log(`longitude: ${lng} | latitude: ${lat}`);
 
   await calculateDistance(loc, all_obj);
   await calculateDistance(loc, all_tr);
