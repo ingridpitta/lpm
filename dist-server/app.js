@@ -40,7 +40,11 @@ var _profileInfos = _interopRequireDefault(require("./routes/private/profileInfo
 
 var _registerObject = _interopRequireDefault(require("./routes/private/registerObject"));
 
+var _objects = _interopRequireDefault(require("./routes/private/objects"));
+
 var _registerTravel = _interopRequireDefault(require("./routes/private/registerTravel"));
+
+var _travels = _interopRequireDefault(require("./routes/private/travels"));
 
 var _deal = _interopRequireDefault(require("./routes/private/deal"));
 
@@ -164,7 +168,9 @@ app.use("/chat", _chat["default"]);
 app.use("/dashboard", _dashboard["default"]);
 app.use("/profile", _profileInfos["default"]);
 app.use("/registerObject", _registerObject["default"]);
+app.use("/objects", _objects["default"]);
 app.use("/registerTravel", _registerTravel["default"]);
+app.use("/travels", _travels["default"]);
 app.use("/deal", _deal["default"]); // eslint-disable-next-line no-console
 
 app.listen(process.env.PORT, function () {

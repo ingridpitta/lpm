@@ -56,4 +56,5 @@ router.get("/detail/:id", async (req, res) => {
   }
 });
 
+
 export default router;

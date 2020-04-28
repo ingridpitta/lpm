@@ -1,7 +1,6 @@
 @import "./materialize.scss";
-@import url('https://fonts.googleapis.com/css?family=Barlow:300,400,600,700,900');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css');
-
+@import url("https://fonts.googleapis.com/css?family=Barlow:300,400,600,700,900");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.4/croppie.min.css");
 
 /* Custom Stylesheet */
 /**
@@ -12,7 +11,7 @@
  */
 
 * {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
 }
 
 body {
@@ -29,15 +28,15 @@ h1 {
 }
 
 h5 {
- line-height: 1.5em;
+  line-height: 1.5em;
 }
- 
+
 p {
   line-height: 2rem;
 }
 
 button {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
 }
 
 .btn-block {
@@ -45,9 +44,9 @@ button {
 }
 
 .btn-dash {
-  margin-right: 0 !important; 
+  margin-right: 0 !important;
 }
- 
+
 .container {
   margin: 0 auto;
   max-width: 1280px;
@@ -85,38 +84,39 @@ input[type="file"] {
   text-align: initial; /* restore text-align to default */
 }
 
- .sidenav-trigger {
-   color: black;
- }
- 
- .parallax-container {
-   min-height: 420px;
-   line-height: 0;
-   height: auto;
-   color: rgba(255,255,255,.9);
- }
+.sidenav-trigger {
+  color: black;
+}
 
- .parallax-container .section {
-   width: 100%;
-  }
+.parallax-container {
+  min-height: 420px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255, 255, 255, 0.9);
+}
 
-  .auth h3, button {
-      margin-bottom: 1em;
-  }
+.parallax-container .section {
+  width: 100%;
+}
 
-  .auth p {
-    margin-bottom: 2em;
-  }
+.auth h3,
+button {
+  margin-bottom: 1em;
+}
 
-  .error-message {
-    color: red;
-    font-size: 0.8em;
-  }
+.auth p {
+  margin-bottom: 2em;
+}
 
-  // Dashboard Styles
-  .dashboard {
-    margin-top: 60px;
-  }
+.error-message {
+  color: red;
+  font-size: 0.8em;
+}
+
+// Dashboard Styles
+.dashboard {
+  margin-top: 60px;
+}
 
 .content {
   margin-top: 60px;
@@ -146,25 +146,25 @@ input[type="file"] {
   height: 80px !important;
 }
 
-.tabs .tab a{
-  color:#000;
+.tabs .tab a {
+  color: #000;
   // text-transform: none !important;
-} 
+}
 
 .tabs .tab a:hover {
   color: $secondary-color;
-} 
+}
 
 .tabs .tab a.active {
   color: $secondary-color;
-} 
+}
 
 .tabs .indicator {
   background-color: $secondary-color;
 }
 
 // END TAB STYLES
- 
+
 .icon-block {
   padding: 0 15px;
 }
@@ -177,37 +177,27 @@ footer.page-footer {
   margin: 0;
 }
 
-
-
- 
- @media only screen and (max-width : 992px) {
-   
+@media only screen and (max-width: 992px) {
   .parallax-container .section {
-     position: absolute;
-     top: 40%;
-   }
-
-   #index-banner .section {
-     top: 10%;
-   }
-
-   nav .brand-logo {
-     font-size: 1.5em;
-   }
-
-   .intro {
-    display: block;
+    position: absolute;
+    top: 40%;
   }
 
- }
- 
- @media only screen and (max-width : 600px) {
-   
   #index-banner .section {
-     top: 0;
-   }
+    top: 10%;
+  }
 
- }
+  nav .brand-logo {
+    font-size: 1.5em;
+  }
 
+  .intro {
+    display: block;
+  }
+}
 
- 
+@media only screen and (max-width: 600px) {
+  #index-banner .section {
+    top: 0;
+  }
+}
