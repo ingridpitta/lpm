@@ -29,18 +29,20 @@ const calculateDistance = async (org, destinations) => {
           const result = rows.map((x, index) => ({
             user_origin: response.originAddresses[0],
             destination: response.destinationAddresses[index],
-            distance: x.distance.value,
+            distance: x.distance ? x.distance.value : undefined,
             data: destinations[index],
-            type: destinations[index].type
+            type: destinations[index].type,
+            status: x.status
           }));
 
+          console.log({ rows });
           result.sort((a, b) => a.distance - b.distance);
 
           const objs = result.filter(x => x.type == "obj");
           const trs = result.filter(x => x.type == "tr");
 
           if (objs.length) {
-            const data = objs;
+            const data = objs.filter(x => x.status == "OK");
             const divObject = document.getElementById("object");
             let content_obj = "";
 
@@ -92,7 +94,7 @@ const calculateDistance = async (org, destinations) => {
           }
 
           if (trs.length) {
-            const data = trs;
+            const data = trs.filter(x => x.status == "OK");
             const divTravel = document.getElementById("travel");
             let content_tr = "";
 
