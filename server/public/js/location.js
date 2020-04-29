@@ -8,6 +8,22 @@ const api = axios.create({
   baseURL: BASE_URL
 });
 
+moment.locale("br");
+moment.updateLocale('br', {
+  longDateFormat : {
+    LT: "h:mm A",
+    LTS: "h:mm:ss A",
+    L: "MM/DD/YYYY",
+    l: "DD/MM/YYYY",
+    LL: "MMMM Do YYYY",
+    ll: "MMM D YYYY",
+    LLL: "MMMM Do YYYY LT",
+    lll: "MMM D YYYY LT",
+    LLLL: "dddd, MMMM Do YYYY LT",
+    llll: "ddd, MMM D YYYY LT"
+  }
+});
+
 const calculateDistance = async (org, destinations) => {
   const user_origin = org;
   const dest = destinations.map(x => x.origin);
@@ -58,16 +74,19 @@ const calculateDistance = async (org, destinations) => {
                   price
                 } = obj.data;
 
+                const format_departure = moment(departure).format('l');
+                const format_arrival = moment(arrival).format('l');
+
                 content_obj += `<div class="row center-cols center-align">
                                 <div class="col l3 m4 s10">
                                   <div class="card">
                                     <div class="card-image">
                                       <img src="../../images/dashboard/dark-map.png">
                                       <div class="card-title">
-                                        <div class="card-subtitle">Partida em ${departure}</div>
+                                        <div class="card-subtitle">Partida em ${format_departure}</div>
                                         <div class="object--origin">${origin}</div>
                                         <div class="vl"></div>
-                                        <div class="card-subtitle">Chegada em ${arrival}</div>
+                                        <div class="card-subtitle">Chegada em ${format_arrival}</div>
                                         <div class="object--destination">${destination}</div>
                                       </div>
                                     </div>
@@ -110,16 +129,19 @@ const calculateDistance = async (org, destinations) => {
                   price
                 } = tr.data;
 
+                const format_departure = moment(departure).format("l");
+                const format_arrival = moment(arrival).format("l");
+
                 content_tr += `<div class="row center-cols center-align">
                     <div class="col l3 m4 s10">
                       <div class="card">
                         <div class="card-image">
                           <img src="../../images/dashboard/dark-map.png">
                           <div class="card-title">
-                            <div class="card-subtitle">Partida em ${departure}</div>
+                            <div class="card-subtitle">Partida em ${format_departure}</div>
                             <div class="travel--origin">${origin}</div>
                             <div class="vl"></div>
-                            <div class="card-subtitle">Chegada em ${arrival}</div>
+                            <div class="card-subtitle">Chegada em ${format_arrival}</div>
                             <div class="travel--destination">${destination}</div>
                           </div>
                         </div>
@@ -201,6 +223,7 @@ const obj_data = async () => {
 };
 
 const displayLocationInfo = async position => {
+  
   const lng = await position.coords.longitude;
   const lat = await position.coords.latitude;
 
@@ -218,5 +241,6 @@ const displayLocationInfo = async position => {
 const navigatorObject = window.navigator;
 
 if (navigatorObject.geolocation) {
+  
   navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
 }
