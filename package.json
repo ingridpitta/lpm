@@ -60,7 +60,10 @@
       "./server/public/js/materialize.js",
       "./server/public/js/materialize.min.js",
       "./server/public/js/editImageSignUp.js",
-      "./server/public/js/location.js"
+      "./server/public/js/location.js",
+      "./server/public/js/moment.js",
+      "./server/public/js/moment-with-locales.js",
+      "./server/public/js/deal.js"
     ],
     "plugins": [
       [
