@@ -1,4 +1,4 @@
-const BASE_URL = "https://levapramim-lpm.herokuapp.com";
+const BASE_URL = "https://www.mlab.com/databases/heroku_9bc9z0f8/collections";
 const api = axios.create({
   baseURL: BASE_URL
 });
