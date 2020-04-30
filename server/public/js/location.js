@@ -104,7 +104,8 @@ const calculateDistance = async (org, destinations) => {
                   departure,
                   arrival,
                   space,
-                  price
+                  price,
+                  _id,
                 } = tr.data;
 
                 content_tr += `
@@ -130,7 +131,7 @@ const calculateDistance = async (org, destinations) => {
                           <p>${price}</p>
                         </div>
                         <div class="card-action">
-                          <a class="modal-trigger" href="#modal2">Entre em contato</a>
+                          <a class="modal-trigger" href="/auth/match/${_id}">Entre em contato</a>
                         </div>
                       </div>
                     </div>`;
