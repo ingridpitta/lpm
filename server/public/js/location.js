@@ -9,8 +9,8 @@ const api = axios.create({
 });
 
 moment.locale("br");
-moment.updateLocale('br', {
-  longDateFormat : {
+moment.updateLocale("br", {
+  longDateFormat: {
     LT: "h:mm A",
     LTS: "h:mm:ss A",
     L: "MM/DD/YYYY",
@@ -43,6 +43,8 @@ const calculateDistance = async (org, destinations) => {
         } else {
           const rows = response.rows[0].elements;
           const result = rows.map((x, index) => ({
+            _id: destinations[index]._id,
+            user_id: destinations[index].user_id,
             user_origin: response.originAddresses[0],
             destination: response.destinationAddresses[index],
             distance: x.distance ? x.distance.value : undefined,
@@ -51,7 +53,6 @@ const calculateDistance = async (org, destinations) => {
             status: x.status
           }));
 
-          console.log({ rows });
           result.sort((a, b) => a.distance - b.distance);
 
           const objs = result.filter(x => x.type == "obj");
@@ -65,6 +66,8 @@ const calculateDistance = async (org, destinations) => {
             if (data.length) {
               data.map(obj => {
                 const {
+                  _id,
+                  user_id,
                   description,
                   origin,
                   destination,
@@ -74,8 +77,8 @@ const calculateDistance = async (org, destinations) => {
                   price
                 } = obj.data;
 
-                const format_departure = moment(departure).format('l');
-                const format_arrival = moment(arrival).format('l');
+                const format_departure = moment(departure).format("l");
+                const format_arrival = moment(arrival).format("l");
 
                 content_obj += `<div class="row center-cols center-align">
                                 <div class="col l3 m4 s10">
@@ -100,7 +103,7 @@ const calculateDistance = async (org, destinations) => {
                                       <p>${price}</p>
                                     </div>
                                     <div class="card-action">
-                                      <a href="#">Entre em contato</a>
+                                      <a href="deal/object/${_id}">Entre em contato</a>
                                     </div>
                                   </div>
                                 </div>
@@ -120,6 +123,8 @@ const calculateDistance = async (org, destinations) => {
             if (data.length) {
               data.map(tr => {
                 const {
+                  _id,
+                  user_id,
                   description,
                   origin,
                   destination,
@@ -155,7 +160,7 @@ const calculateDistance = async (org, destinations) => {
                           <p>${price}</p>
                         </div>
                         <div class="card-action">
-                          <a href="#">Entre em contato</a>
+                          <a href="deal/travel/${_id}">Entre em contato</a>
                         </div>
                       </div>
                     </div>
@@ -166,7 +171,6 @@ const calculateDistance = async (org, destinations) => {
             }
             divTravel.innerHTML = content_tr;
           }
-          console.log({ objs, trs });
           return result;
         }
       }
@@ -182,6 +186,8 @@ const tr_data = async () => {
 
       if (data.length) {
         all_tr = await data.map(tr => ({
+          _id: tr._id,
+          user_id: tr.user,
           description: tr.description,
           origin: tr.origin,
           destination: tr.destination,
@@ -206,6 +212,8 @@ const obj_data = async () => {
 
       if (data.length) {
         all_obj = await data.map(obj => ({
+          _id: obj._id,
+          user_id: obj.user,
           description: obj.description,
           origin: obj.origin,
           destination: obj.destination,
@@ -223,7 +231,6 @@ const obj_data = async () => {
 };
 
 const displayLocationInfo = async position => {
-  
   const lng = await position.coords.longitude;
   const lat = await position.coords.latitude;
 
@@ -232,8 +239,6 @@ const displayLocationInfo = async position => {
   await obj_data();
   await tr_data();
 
-  // console.log(`longitude: ${lng} | latitude: ${lat}`);
-
   await calculateDistance(loc, all_obj);
   await calculateDistance(loc, all_tr);
 };
@@ -241,6 +246,5 @@ const displayLocationInfo = async position => {
 const navigatorObject = window.navigator;
 
 if (navigatorObject.geolocation) {
-  
   navigatorObject.geolocation.getCurrentPosition(displayLocationInfo);
 }
