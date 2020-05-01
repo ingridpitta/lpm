@@ -1,0 +1,109 @@
+<div class="container auth">
+    <div class="section">
+        <div class="row center">
+            <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                <h3>Antes de entrar em contato, escolha o seu objeto</h3>
+                <p>O objeto selecionado é o que será levado na viagem<p></p>
+            </div>
+            
+            <div class="row">
+
+                <form action="" method="POST">
+                    {{#if objects}}
+                    <div class="col l12 m12 s12">
+                        <div class="row center-cols center-align">
+                            {{#each objects}}
+                            <div class="col l3 m4 s10">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="../../images/dashboard/dark-map.png">
+                                    </div>
+                                    <div class="card-content">
+                                        <p>{{description}}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="">Selecionar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div>
+                        <h3>Nenhum objeto cadastrado.</h3>
+                    <a href="registerObject">Cadastrar Objeto</a>
+                    </div>
+                    {{/if}}
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../../js/materialize.js"></script>
+<script src="../../js/init.js"></script>
+<script src="../../js/login.js"></script>
+
+
+
+
+
+
+<div>
+    <h3>Dados da Viagem:</h3>
+    {{#if travel}}
+    <div id="content--deal">
+        <h3>{{this.origin}}</h3>
+        <h3>{{this.destination}}</h3>
+        <h3>{{this.departure}}</h3>
+        <h3>{{this.space}}</h3>
+        <h3>{{this.description}}</h3>
+        <h3>{{this.price}}</h3>
+    </div>
+    {{/if}}
+</div>
+
+<button id="deal">ENTRAR EM CONTATO</button>
+
+
+{{!-- 
+<div>
+    <h3>Selecione um dos seus objetos:</h3>
+    {{#if objects}}
+    {{#each objects}}
+    <div id="content--user">
+        <h3>{{this.origin}}</h3>
+        <h3>{{this.destination}}</h3>
+        <h3>{{this.departure}}</h3>
+        <h3>{{this.size}}</h3>
+        <h3>{{this.description}}</h3>
+        <h3>{{this.price}}</h3>
+    </div>
+    {{/each}}
+    {{else}}
+    <div>
+        <h3>Nenhum objeto cadastrado.</h3>
+        <a href="registerObject">Cadastrar Objeto</a>
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    <h3>Dados da Viagem:</h3>
+    {{#if travel}}
+    <div id="content--deal">
+        <h3>{{this.origin}}</h3>
+        <h3>{{this.destination}}</h3>
+        <h3>{{this.departure}}</h3>
+        <h3>{{this.space}}</h3>
+        <h3>{{this.description}}</h3>
+        <h3>{{this.price}}</h3>
+    </div>
+    {{/if}}
+</div>
+
+<button id="deal">ENTRAR EM CONTATO</button> --}}

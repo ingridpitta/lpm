@@ -27,44 +27,33 @@
         <div class="row">
             <div class="col offset-l1 l10 offset-m2 m8 offset-s1 s10">
                 <ul class="tabs">
-                    <li class="tab col s4"><a class="active" href="#travel-object">Tudo</a></li>
-                    <li class="tab col s4"><a href="#object">Objetos</a></li>
-                    <li class="tab col s4"><a href="#travel">Viagens</a></li>
+                    <li class="tab col s6"><a href="#objectTab">Objetos</a></li>
+                    <li class="tab col s6"><a href="#travelTab">Viagens</a></li>
                 </ul>
             </div>
-            <div class="content">
-                <div id="travel-object" class="col s12">Tudo</div>
-                <div class="col l12 m12 s12">
-                  <div class="row center-cols">
-                      <div id="object"></div>
-                  </div>
-                </div>
-                <div class="col l12 m12 s12">
-                  <div class="row center-cols">
-                      <div id="travel"></div>
-                  </div>
-                </div>
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                        <h4>Selecione os filtros abaixo</h4>
-                        <p>Filtros</p>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+            <div class="content col offset-l1 l10 offset-m2 m8 offset-s1 s10">
+                <div id="objectTab" class="col l12 m12 s12">
+                    <div class="row center-cols">
+                        <div id="object"></div>
                     </div>
                 </div>
-                <div id="modal2" class="modal">
-                    <div class="modal-content">
-                        <h4>Escolha o objeto</h4>
-                        <p>Qual objeto você quer que pegue carona?</p>
-                        <h5>Olá! Bem-vind@ {{user.name}}</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ir para a conversa</a>
+                 <div id="travelTab" class="col l12 m12 s12">
+                    <div class="row center-cols">
+                        <div id="travel"></div>
                     </div>
                 </div>
             </div>
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4>Selecione os filtros abaixo</h4>
+                    <p>Filtros</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        </div>
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large">
                     <i class="large material-icons">mode_edit</i>
@@ -77,6 +66,8 @@
 </section>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/moment.js"></script>
+<script src="../../js/moment-with-locales.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvAW-8hwHHViHvPBUFQTbLUuJzG89kbYw"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

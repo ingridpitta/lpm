@@ -8,6 +8,22 @@ const api = axios.create({
   baseURL: BASE_URL
 });
 
+moment.locale("br");
+moment.updateLocale("br", {
+  longDateFormat: {
+    LT: "h:mm A",
+    LTS: "h:mm:ss A",
+    L: "MM/DD/YYYY",
+    l: "DD/MM/YYYY",
+    LL: "MMMM Do YYYY",
+    ll: "MMM D YYYY",
+    LLL: "MMMM Do YYYY LT",
+    lll: "MMM D YYYY LT",
+    LLLL: "dddd, MMMM Do YYYY LT",
+    llll: "ddd, MMM D YYYY LT"
+  }
+});
+
 const calculateDistance = async (org, destinations) => {
   const user_origin = org;
   const dest = destinations.map(x => x.origin);
@@ -27,6 +43,8 @@ const calculateDistance = async (org, destinations) => {
         } else {
           const rows = response.rows[0].elements;
           const result = rows.map((x, index) => ({
+            _id: destinations[index]._id,
+            user_id: destinations[index].user_id,
             user_origin: response.originAddresses[0],
             destination: response.destinationAddresses[index],
             distance: x.distance ? x.distance.value : undefined,
@@ -35,7 +53,6 @@ const calculateDistance = async (org, destinations) => {
             status: x.status
           }));
 
-          console.log({ rows });
           result.sort((a, b) => a.distance - b.distance);
 
           const objs = result.filter(x => x.type == "obj");
@@ -49,6 +66,8 @@ const calculateDistance = async (org, destinations) => {
             if (data.length) {
               data.map(obj => {
                 const {
+                  _id,
+                  user_id,
                   description,
                   origin,
                   destination,
@@ -58,16 +77,20 @@ const calculateDistance = async (org, destinations) => {
                   price
                 } = obj.data;
 
+                const format_departure = moment(departure).format("l");
+                const format_arrival = moment(arrival).format("l");
+
                 content_obj += `
+                                <div class="col l4 m10 s10">
                                   <div class="card">
                                     <div class="card-image">
                                       <img src="../../images/dashboard/dark-map.png">
                                       <div class="card-title">
-                                        <div class="card-subtitle">Partida em ${departure}</div>
-                                        <div class="object--origin">${origin}</div>
+                                        <div class="card-subtitle">Partida em ${format_departure}</div>
+                                        <div class="travel--origin">${origin}</div>
                                         <div class="vl"></div>
-                                        <div class="card-subtitle">Chegada em ${arrival}</div>
-                                        <div class="object--destination">${destination}</div>
+                                        <div class="card-subtitle">Chegada em ${format_arrival}</div>
+                                        <div class="travel--destination">${destination}</div>
                                       </div>
                                     </div>
                                     <div class="card-content">
@@ -80,9 +103,10 @@ const calculateDistance = async (org, destinations) => {
                                       <p>${price}</p>
                                     </div>
                                     <div class="card-action">
-                                      <a href="#">Entre em contato</a>
+                                      <a href="deal/object/${_id}">Entre em contato</a>
                                     </div>
-                                  </div>`;
+                                  </div>
+                                </div>`;
               });
             } else {
               content_obj += "<div><h2>Nenhum objeto cadastrado</h2></div>";
@@ -98,6 +122,8 @@ const calculateDistance = async (org, destinations) => {
             if (data.length) {
               data.map(tr => {
                 const {
+                  _id,
+                  user_id,
                   description,
                   origin,
                   destination,
@@ -105,43 +131,44 @@ const calculateDistance = async (org, destinations) => {
                   arrival,
                   space,
                   price,
-                  _id,
                 } = tr.data;
 
+                const format_departure = moment(departure).format("l");
+                const format_arrival = moment(arrival).format("l");
+
                 content_tr += `
-                    <div class="col l3 m4 s10">
-                      <div class="card">
-                        <div class="card-image">
-                          <img src="../../images/dashboard/dark-map.png">
-                          <div class="card-title">
-                            <div class="card-subtitle">Partida em ${departure}</div>
-                            <div class="travel--origin">${origin}</div>
-                            <div class="vl"></div>
-                            <div class="card-subtitle">Chegada em ${arrival}</div>
-                            <div class="travel--destination">${destination}</div>
-                          </div>
-                        </div>
-                        <div class="card-content">
-                          <p>${description}</p>
-                        </div>
-                        <div class="card-content">
-                          <p>${space}</p>
-                        </div>
-                        <div class="card-content">
-                          <p>${price}</p>
-                        </div>
-                        <div class="card-action">
-                          <a class="modal-trigger" href="/auth/match/${_id}">Entre em contato</a>
-                        </div>
-                      </div>
-                    </div>`;
+                            <div class="col l4 m10 s10">
+                              <div class="card">
+                                <div class="card-image">
+                                  <img src="../../images/dashboard/dark-map.png">
+                                  <div class="card-title">
+                                    <div class="card-subtitle">Partida em ${format_departure}</div>
+                                    <div class="travel--origin">${origin}</div>
+                                    <div class="vl"></div>
+                                    <div class="card-subtitle">Chegada em ${format_arrival}</div>
+                                    <div class="travel--destination">${destination}</div>
+                                  </div>
+                                </div>
+                                <div class="card-content">
+                                  <p>${description}</p>
+                                </div>
+                                <div class="card-content">
+                                  <p>${space}</p>
+                                </div>
+                                <div class="card-content">
+                                  <p>${price}</p>
+                                </div>
+                                <div class="card-action">
+                                  <a href="deal/travel/${_id}">Entre em contato</a>
+                                </div>
+                              </div>
+                            </div>`;
               });
             } else {
               content_tr += "<div><h2>Nenhuma viagem cadastrada</h2></div>";
             }
             divTravel.innerHTML = content_tr;
           }
-          console.log({ objs, trs });
           return result;
         }
       }
@@ -157,6 +184,8 @@ const tr_data = async () => {
 
       if (data.length) {
         all_tr = await data.map(tr => ({
+          _id: tr._id,
+          user_id: tr.user,
           description: tr.description,
           origin: tr.origin,
           destination: tr.destination,
@@ -181,6 +210,8 @@ const obj_data = async () => {
 
       if (data.length) {
         all_obj = await data.map(obj => ({
+          _id: obj._id,
+          user_id: obj.user,
           description: obj.description,
           origin: obj.origin,
           destination: obj.destination,
@@ -205,8 +236,6 @@ const displayLocationInfo = async position => {
 
   await obj_data();
   await tr_data();
-
-  // console.log(`longitude: ${lng} | latitude: ${lat}`);
 
   await calculateDistance(loc, all_obj);
   await calculateDistance(loc, all_tr);

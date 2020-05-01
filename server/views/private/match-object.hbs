@@ -1,0 +1,38 @@
+<h1>MATCH OBJECT</h1>
+
+<div>
+    <h3>Selecione uma das suas viagens:</h3>
+    {{#if travels}}
+    {{#each travels}}
+    <div id="content--user">
+        <h3>{{this.origin}}</h3>
+        <h3>{{this.destination}}</h3>
+        <h3>{{this.departure}}</h3>
+        <h3>{{this.space}}</h3>
+        <h3>{{this.description}}</h3>
+        <h3>{{this.price}}</h3>
+    </div>
+    {{/each}}
+    {{else}}
+    <div>
+        <h3>Nenhuma viagem cadastrada.</h3>
+        <a href="registerTravel">Vou Viajar</a>
+    </div>
+    {{/if}}
+</div>
+
+<div>
+    <h3>Dados do objeto:</h3>
+    {{#if object}}
+    <div id="content--deal">
+        <h3>{{this.origin}}</h3>
+        <h3>{{this.destination}}</h3>
+        <h3>{{this.departure}}</h3>
+        <h3>{{this.size}}</h3>
+        <h3>{{this.description}}</h3>
+        <h3>{{this.price}}</h3>
+    </div>
+    {{/if}}
+</div>
+
+<button id="deal">ENTRAR EM CONTATO</button>
