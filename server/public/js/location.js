@@ -26,6 +26,9 @@ moment.updateLocale("br", {
 
 const calculateDistance = async (org, destinations) => {
   const user_origin = org;
+
+  if(!destinations) return;
+
   const dest = destinations.map(x => x.origin);
 
   const service = new google.maps.DistanceMatrixService();
