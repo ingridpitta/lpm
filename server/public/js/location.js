@@ -3,7 +3,7 @@
 let all_tr;
 let all_obj;
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = "https://levapramim-lpm.herokuapp.com";
 const api = axios.create({
   baseURL: BASE_URL
 });
@@ -26,6 +26,9 @@ moment.updateLocale("br", {
 
 const calculateDistance = async (org, destinations) => {
   const user_origin = org;
+
+  if(!destinations) return;
+
   const dest = destinations.map(x => x.origin);
 
   const service = new google.maps.DistanceMatrixService();
