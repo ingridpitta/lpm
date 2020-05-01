@@ -3,6 +3,7 @@ const api = axios.create({
   baseURL: BASE_URL
 });
 
+//Create Deal
 const postDeal = (user2, travel, userObject) => {
   const deal = { user2, travel, userObject };
   api
