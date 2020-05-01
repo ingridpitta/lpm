@@ -17,8 +17,6 @@ router.get("/object/:id", async (req, res) => {
     const object = await UserObject.findOne({ _id: id });
     const travels = await Travel.find({ user: user._id });
 
-    console.log({ travels });
-
     res.render("private/match-object", { object, travels });
   } catch (error) {
     throw new Error(error);

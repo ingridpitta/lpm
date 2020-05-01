@@ -77,13 +77,6 @@ input[type="file"] {
   justify-content: space-between;
 }
 
-.center-cols > .col {
-  margin-top: 48px;
-  float: none; /* disable the float */
-  display: inline-block; /* make blocks inline-block */
-  text-align: initial; /* restore text-align to default */
-}
-
 .sidenav-trigger {
   color: black;
 }
@@ -113,7 +106,20 @@ button {
   font-size: 0.8em;
 }
 
-// Dashboard Styles
+
+
+
+// DROPDOWN STYLES
+
+.dropdown-trigger {
+  padding: 0 24px;
+}
+
+
+
+
+// DASHBOARD STYLES
+
 .dashboard {
   margin-top: 60px;
 }
@@ -122,19 +128,36 @@ button {
   margin-top: 60px;
 }
 
+
+
+
 // CARD STYLES
 
 .card-subtitle {
-  font-size: 0.7em;
+  font-size: 0.7em !important;
+}
+
+// Col Cards Styles
+.center-cols > .col {
+  margin-top: 48px;
+  // float: none; /* disable the float */
+  // display: inline-block; /* make blocks inline-block */
+  // text-align: initial; /* restore text-align to default */
 }
 
 //
+
+
+
 
 .vl {
   border-left: 1px solid #efefef;
   height: 60px;
   margin: 5px;
 }
+
+
+
 
 // TABS STYLES
 
@@ -199,5 +222,21 @@ footer.page-footer {
 @media only screen and (max-width: 600px) {
   #index-banner .section {
     top: 0;
+  }
+
+  .dashboard {
+    margin-top: 36px;
+  }
+
+  .content {
+    margin-top: 24px;
+  }
+
+  .card-subtitle {
+    font-size: 0.7em !important;
+  }
+
+  .card-title {
+    font-size: 1.2em !important;
   }
 }
