@@ -81,7 +81,7 @@ const calculateDistance = async (org, destinations) => {
                 const format_arrival = moment(arrival).format("l");
 
                 content_obj += `
-                                <div class="col l4 m12 s12">
+                                <div class="col l4 m12 s12 card-space">
                                   <div class="card">
                                     <div class="card-image">
                                       <img src="../../images/dashboard/dark-map.png">
@@ -137,7 +137,7 @@ const calculateDistance = async (org, destinations) => {
                 const format_arrival = moment(arrival).format("l");
 
                 content_tr += `
-                            <div class="col l4 m12 s12">
+                            <div class="col l4 m12 s12 card-space">
                               <div class="card">
                                 <div class="card-image">
                                   <img src="../../images/dashboard/dark-map.png">
