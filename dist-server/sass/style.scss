@@ -18,9 +18,26 @@ body {
   font-size: 16px;
 }
 
-nav ul a,
-nav .brand-logo {
+nav ul a {
   color: black;
+}
+
+.nav-wrapper {
+  // height: 80px !important;
+}
+
+.brand-logo img {
+  height: 36px;
+  margin-top: 14px;
+}
+
+.btn-fixed-280 {
+  width: 280px;
+}
+
+.center-padding {
+  text-align: center;
+  padding: 40px 0 68px 0;
 }
 
 h1 {
@@ -82,7 +99,7 @@ input[type="file"] {
 }
 
 .parallax-container {
-  min-height: 420px;
+  min-height: 640px;
   line-height: 0;
   height: auto;
   color: rgba(255, 255, 255, 0.9);
@@ -144,9 +161,9 @@ button {
 // Col Cards Styles
 .center-cols > .col {
   margin-top: 48px;
-  // float: none; /* disable the float */
-  // display: inline-block; /* make blocks inline-block */
-  // text-align: initial; /* restore text-align to default */
+  float: none; /* disable the float */
+  display: inline-block; /* make blocks inline-block */
+  text-align: initial; /* restore text-align to default */
 }
 
 .btn-close {
@@ -248,4 +265,10 @@ footer.page-footer {
   .card-title {
     font-size: 1.2em !important;
   }
+
+  .brand-logo img {
+    height: 28px;
+    margin-top: 12px;
+  }
+  
 }
