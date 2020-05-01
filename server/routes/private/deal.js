@@ -17,7 +17,7 @@ router.get("/object/:id", async (req, res) => {
     const object = await UserObject.findOne({ _id: id });
     const travels = await Travel.find({ user: user._id });
 
-    console.log({ travels });
+    // console.log({ travels });
 
     res.render("private/match-object", { object, travels });
   } catch (error) {
@@ -33,7 +33,7 @@ router.get("/travel/:id", async (req, res) => {
     const travel = await Travel.findOne({ _id: id });
     const objects = await UserObject.find({ user: user._id });
 
-    console.log({ objects });
+    // console.log({ objects });
 
     res.render("private/match-travel", { travel, objects });
   } catch (error) {

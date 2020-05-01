@@ -1,10 +1,9 @@
-<h1>MATCH TRAVEL</h1>
-
-<div>
+{{#if travel}}
+<div id="deal--container" data={{this._id}}>
     <h3>Selecione um dos seus objetos:</h3>
     {{#if objects}}
     {{#each objects}}
-    <div id="content--user">
+    <div class="content--user">
         <h3>{{this.origin}}</h3>
         <h3>{{this.destination}}</h3>
         <h3>{{this.departure}}</h3>
@@ -12,6 +11,7 @@
         <h3>{{this.description}}</h3>
         <h3>{{this.price}}</h3>
     </div>
+    <button class="btn-select" id="deal--{{this._id}}">SELECIONAR</button>
     {{/each}}
     {{else}}
     <div>
@@ -20,19 +20,12 @@
     </div>
     {{/if}}
 </div>
+{{/if}}
 
-<div>
-    <h3>Dados da Viagem:</h3>
-    {{#if travel}}
-    <div id="content--deal">
-        <h3>{{this.origin}}</h3>
-        <h3>{{this.destination}}</h3>
-        <h3>{{this.departure}}</h3>
-        <h3>{{this.space}}</h3>
-        <h3>{{this.description}}</h3>
-        <h3>{{this.price}}</h3>
-    </div>
-    {{/if}}
-</div>
-
-<button id="deal">ENTRAR EM CONTATO</button>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/moment.js"></script>
+<script src="../../js/moment-with-locales.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="../../js/materialize.js"></script>
+<script src="../../js/init.js"></script>
+<script src="../../js/deal.js"></script>
