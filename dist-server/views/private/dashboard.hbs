@@ -1,16 +1,24 @@
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">Meus Dados</a></li>
+    <li class="divider"></li>
+    <li><a href="auth/login">Logout</a></li>
+</ul>
+
 <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-        <a id="logo-container" href="/" class="brand-logo">Leva Pra Mim</a>
+        <a id="logo-container" href="/" class="brand-logo"><img src="../../images/lp/logoLPM.svg" alt="Leva Pra Mim Logo"></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="">Meus Dados</a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Minha Conta</a></li>
             <li><a class="btn btn-dash" href="registerTravel">Vou viajar</a></li>
             <li><a class="btn btn-dash" href="registerObject">Cadastrar Objeto</a></li>
         </ul>
 
         <ul id="nav-mobile" class="sidenav">
-            <li><a href="auth/login">Meus Dados</a></li>
             <li><a href="registerTravel">Vou Viajar</a></li>
             <li><a href="registerObject">Cadastrar Objeto</a></li>
+            <li><a href="auth/login">Meus Dados</a></li>
+            <li><a href="auth/login">Logout</a></li>
         </ul>
         <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
@@ -27,31 +35,40 @@
         <div class="row">
             <div class="col offset-l1 l10 offset-m2 m8 offset-s1 s10">
                 <ul class="tabs">
-                    <li class="tab col s6"><a href="#object">Objetos</a></li>
-                    <li class="tab col s6"><a href="#travel">Viagens</a></li>
+                    <li class="tab col s6"><a href="#objectTab">Objetos</a></li>
+                    <li class="tab col s6"><a href="#travelTab">Viagens</a></li>
                 </ul>
             </div>
-            <div class="content">
-                <div id="travel" class="col l12 m12 s12"></div>
-                <div id="object" class="col s12 m12 s12"></div>
-                <!-- Modal Structure -->
-                <div id="modal1" class="modal">
-                    <div class="modal-content">
-                        <h4>Selecione os filtros abaixo</h4>
-                        <p>Filtros</p>
+            <div class="content col offset-l1 l10 offset-m2 m8 s12">
+                <div id="objectTab" class="col l12 m12 s12">
+                    <div class="row center-cols">
+                        <div id="object"></div>
                     </div>
-                    <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+                 <div id="travelTab" class="col l12 m12 s12">
+                    <div class="row center-cols">
+                        <div id="travel"></div>
                     </div>
                 </div>
             </div>
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <h4>Selecione os filtros abaixo</h4>
+                    <p>Filtros</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+        </div>
             <div class="fixed-action-btn">
                 <a class="btn-floating btn-large">
-                    <i class="large material-icons">mode_edit</i>
+                    <i class="large material-icons">add</i>
                 </a>
                 <ul>
-                    <li><a class="btn-floating red"><i class="material-icons">directions_car</i></a></li>
-                    <li><a class="btn-floating yellow darken-1"><i class="material-icons">present_to_all</i></a></li>
+                    <li><a href="registerTravel" class="btn-floating green"><i class="material-icons">directions_car</i></a></li>
+                    <li><a href="registerObject" class="btn-floating green"><i class="material-icons">present_to_all</i></a></li>
                 </ul>
             </div>
 </section>
@@ -61,6 +78,7 @@
 <script src="../../js/moment-with-locales.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key={{this.apiKey}}"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="../../js/materialize.js"></script>
 <script src="../../js/init.js"></script>
 <script src="../../js/location.js"></script>
@@ -68,11 +86,8 @@
 <script>
     $(document).ready(function () {
         $('.tabs').tabs();
-    });
-    $(document).ready(function () {
         $('.modal').modal();
-    });
-    $(document).ready(function () {
         $('.fixed-action-btn').floatingActionButton();
-    });
+        $(".dropdown-trigger").dropdown();
+    }); 
 </script>

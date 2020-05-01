@@ -67,7 +67,6 @@ passport.use(
     { passReqToCallback: true },
     (req, username, password, callback) => {
       console.log({ req, username });
-      console.log("qualquer");
       User.findOne({ username })
         .then(user => {
           if (!user || !bcrypt.compareSync(password, user.password)) {

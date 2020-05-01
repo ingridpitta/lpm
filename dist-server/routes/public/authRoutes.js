@@ -173,5 +173,9 @@ router.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/auth/login");
 });
+router.get("/match/:_id", function (req, res) {
+  console.log(req.params._id);
+  res.render("private/match");
+});
 var _default = router;
 exports["default"] = _default;

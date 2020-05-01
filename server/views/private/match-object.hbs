@@ -1,31 +1,60 @@
-{{#if object}}
-<div id="deal--container" data={{this._id}}>
-    <h3>Selecione uma das suas viagens:</h3>
-    {{#if travels}}
-    {{#each travels}}
-    <div class="content--user">
-        <h3>{{this.origin}}</h3>
-        <h3>{{this.destination}}</h3>
-        <h3>{{this.departure}}</h3>
-        <h3>{{this.space}}</h3>
-        <h3>{{this.description}}</h3>
-        <h3>{{this.price}}</h3>
-    </div>
-    <button class="btn-select" id="deal--{{this._id}}">SELECIONAR</button>
-    {{/each}}
-    {{else}}
-    <div>
-        <h3>Nenhuma viagem cadastrada.</h3>
-        <a href="registerTravel">Vou Viajar</a>
-    </div>
-    {{/if}}
+<div>
+    <a href="/dashboard" class="btn-close right"><i class="material-icons">close</i></a></li>
 </div>
 {{/if}}
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div class="container auth">
+    <div class="section">
+        <div class="row center">
+            <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                <h3>Antes de entrar em contato, escolha a viagem cadastrada</h3>
+            </div>
+            
+            <div class="row">
+
+                <form action="" method="POST">
+                    {{#if travels}}
+                    <div class="col l12 m12 s12">
+                        <div class="row center-cols center-align">
+                            {{#each travels}}
+                            <div class="col l4 m10 s10">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <img src="../../images/dashboard/dark-map.png">
+                                        <div class="card-title">
+                                            <div class="card-subtitle">Partida em {{departure}}</div>
+                                            <div class="travel--origin">{{origin}}</div>
+                                            <div class="vl"></div>
+                                            <div class="card-subtitle">Chegada em {{arrival}}</div>
+                                            <div class="travel--destination">{{destination}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>{{description}}</p>
+                                    </div>
+                                    <div class="card-action">
+                                        <a href="">Selecionar</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{else}}
+                    <div>
+                        <h5>Nenhuma viagem cadastrada.</h5>
+                    <a href="registerTravel">Vou Viajar</a>
+                    </div>
+                    {{/if}}
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!--  Scripts-->
 <script src="../../js/moment.js"></script>
 <script src="../../js/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
-<script src="../../js/init.js"></script>
-<script src="../../js/deal.js"></script>

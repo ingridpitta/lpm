@@ -88,7 +88,6 @@ _passport["default"].use(new _passportLocal.Strategy({
     req: req,
     username: username
   });
-  console.log("qualquer");
 
   _User["default"].findOne({
     username: username
