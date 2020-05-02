@@ -1,7 +1,6 @@
 <div>
     <a href="/dashboard" class="btn-close right"><i class="material-icons">close</i></a></li>
 </div>
-
 <div class="container auth">
     <div class="section">
         <div class="row center">
@@ -9,46 +8,47 @@
                 <h3>Antes de entrar em contato, escolha o seu objeto</h3>
                 <p>O objeto selecionado é o que será levado na viagem<p></p>
             </div>
-            
+
             <div class="row">
 
-                <form action="" method="POST">
-                    {{#if objects}}
-                    <div class="col l12 m12 s12">
-                        <div class="row center-cols center-align">
-                            {{#each objects}}
-                            <div class="col l3 m4 s10">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../../images/dashboard/dark-map.png">
-                                    </div>
-                                    <div class="card-content">
-                                        <p>{{description}}</p>
-                                    </div>
-                                    <div class="card-action">
-                                        <a href="match-success">Selecionar</a>
-                                    </div>
+                {{#if objects}}
+                <div class="col l12 m12 s12">
+                    <div class="row center-cols center-align">
+                        {{#each objects}}
+                        <div class="col l3 m4 s10">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../../images/dashboard/dark-map.png">
+                                </div>
+                                <div class="card-content">
+                                    <p>{{description}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a id={{this._id}} href="/deal/sucess">Selecionar</a>
                                 </div>
                             </div>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     </div>
-                    {{else}}
-                    <div class="row center">
-                        <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
-                            <h5 class="red-text">Nenhuma objeto cadastrado.</h5>
-                            <br></br>
-                            <a href="../../registerObject" class="btn-large waves-effect waves-light">Cadastrar Objeto</a>
-                        </div>
+                </div>
+                {{else}}
+                <div class="row center">
+                    <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                        <h5 class="red-text">Nenhuma objeto cadastrado.</h5>
+                        <br></br>
+                        <a href="../../registerObject" class="btn-large waves-effect waves-light">Cadastrar Objeto</a>
                     </div>
-                    {{/if}}
-                </form>
+                </div>
+                {{/if}}
             </div>
-            
         </div>
     </div>
 </div>
 
 <!--  Scripts-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/moment.js"></script>
+<script src="../../js/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
+<script src="../../js/deal.js"></script>

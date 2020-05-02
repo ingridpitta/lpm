@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// For axios - find one travels
-router.post("/:id", async (req, res) => {
+// For axios - find one travel
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -27,7 +27,7 @@ router.post("/:id", async (req, res) => {
   }
 });
 
-// For axios - update travels
+// For axios - update travel
 router.post("/update/:id", async (req, res) => {
   const { id } = req.params;
   const {

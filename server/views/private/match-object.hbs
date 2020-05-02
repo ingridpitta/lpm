@@ -8,55 +8,54 @@
             <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
                 <h3>Antes de entrar em contato, escolha a viagem cadastrada</h3>
             </div>
-            
+
             <div class="row">
 
-                <form action="" method="POST">
-                    {{#if travels}}
-                    <div class="col l12 m12 s12">
-                        <div class="row center-cols center-align">
-                            {{#each travels}}
-                            <div class="col l4 m10 s10">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../../images/dashboard/dark-map.png">
-                                        <div class="card-title">
-                                            <div class="card-subtitle">Partida em {{departure}}</div>
-                                            <div class="travel--origin">{{origin}}</div>
-                                            <div class="vl"></div>
-                                            <div class="card-subtitle">Chegada em {{arrival}}</div>
-                                            <div class="travel--destination">{{destination}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <p>{{description}}</p>
-                                    </div>
-                                    <div class="card-action">
-                                        <a href="match-success">Selecionar</a>
+                {{#if travels}}
+                <div class="col l12 m12 s12">
+                    <div class="row center-cols center-align">
+                        {{#each travels}}
+                        <div class="col l4 m10 s10">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../../images/dashboard/dark-map.png">
+                                    <div class="card-title">
+                                        <div class="card-subtitle departure">Partida em {{departure}}</div>
+                                        <div class="travel--origin">{{origin}}</div>
+                                        <div class="vl"></div>
+                                        <div class="card-subtitle arrival">Chegada em {{arrival}}</div>
+                                        <div class="travel--destination">{{destination}}</div>
                                     </div>
                                 </div>
+                                <div class="card-content">
+                                    <p>{{description}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a id={{this._id}} href="/deal/sucess">Selecionar</a>
+                                </div>
                             </div>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     </div>
-                    {{else}}
-                    <div class="row center">
-                        <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
-                            <h5 class="red-text">Nenhuma viagem cadastrada.</h5>
-                            <br></br>
-                            <a href="../../registerTravel" class="btn-large waves-effect waves-light">Cadastrar Viagem</a>
-                        </div>
+                </div>
+                {{else}}
+                <div class="row center">
+                    <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                        <h5 class="red-text">Nenhuma viagem cadastrada.</h5>
+                        <br></br>
+                        <a href="../../registerTravel" class="btn-large waves-effect waves-light">Cadastrar Viagem</a>
                     </div>
-                    {{/if}}
-                </form>
+                </div>
+                {{/if}}
             </div>
-            
         </div>
     </div>
 </div>
 
 <!--  Scripts-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../../js/moment.js"></script>
 <script src="../../js/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
+<script src="../../js/deal.js"></script>
