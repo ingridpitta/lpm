@@ -9,6 +9,22 @@ router.get("/", (req, res) => {
   res.render("private/deal");
 });
 
+router.get("/sucess", (req, res) => {
+  res.render("private/match-sucess");
+});
+
+router.get("/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deals = await Deal.find({ user1: id });
+
+    res.render("private/user-deals", { deals });
+  } catch (error) {
+    throw new Error(error);
+  }
+});
+
 router.get("/object/:id", async (req, res) => {
   const { id } = req.params;
   const { user } = req;

@@ -20,10 +20,10 @@
                                 <div class="card-image">
                                     <img src="../../images/dashboard/dark-map.png">
                                     <div class="card-title">
-                                        <div class="card-subtitle">Partida em {{departure}}</div>
+                                        <div class="card-subtitle departure">Partida em {{departure}}</div>
                                         <div class="travel--origin">{{origin}}</div>
                                         <div class="vl"></div>
-                                        <div class="card-subtitle">Chegada em {{arrival}}</div>
+                                        <div class="card-subtitle arrival">Chegada em {{arrival}}</div>
                                         <div class="travel--destination">{{destination}}</div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                     <p>{{description}}</p>
                                 </div>
                                 <div class="card-action">
-                                    <a id={{this._id}} href="/dashboard">Selecionar</a>
+                                    <a id={{this._id}} href="/deal/sucess">Selecionar</a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,6 @@
                     <a href="registerTravel">Vou Viajar</a>
                 </div>
                 {{/if}}
-
             </div>
 
         </div>
