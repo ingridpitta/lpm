@@ -1,7 +1,7 @@
 
   
   
-<img src=server/public/images/lp/logoLPM.png width=50%>  
+<img src=server/public/images/lp/logoLPM.png width=30%>  
   
 
 
@@ -12,7 +12,7 @@
 
 ## Cadastre-se e comece a usar nossa plataforma
 
-[lpm]: https://levapramim-lpm.herokuapp.com/
+https://levapramim-lpm.herokuapp.com/
 
 ## Quer que levem algo para você ? 
 
@@ -25,10 +25,10 @@ Sim, você pode ganhar dinheiro também. Cadastre alguma viagem que você irá f
 ## Autores
 
 Caio Andreolli 
-[github]: https://github.com/caioandreolli
+https://github.com/caioandreolli
 
 Ingrid Pitta
-[github]: https://github.com/ingridpitta
+https://github.com/ingridpitta
 
 ## Licença
 This project is licensed under the MIT License - see the LICENSE.md file for details.
