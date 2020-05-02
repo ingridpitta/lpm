@@ -78,7 +78,7 @@ router.post(
 );
 
 router.get("/signup/goal", (req, res) => {
-  // res.redirect(307, "/auth/login");
+  res.redirect(307, "/auth/login");
   res.render("private/goal");
 });
 
@@ -104,7 +104,7 @@ router.get(
   "/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/auth/login" }),
   (req, res) => {
-    res.redirect("/dashboard");
+    res.redirect("/auth/signup/goal");
   }
 );
 
