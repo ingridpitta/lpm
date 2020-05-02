@@ -1,7 +1,7 @@
 
 
 
-<img src=server/public/images/lp/logoLPM.png>
+<img src=server/public/images/lp/logoLPM.png width=50%>
 
 
 
