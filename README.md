@@ -34,4 +34,4 @@ Ingrid Pitta
 https://github.com/ingridpitta
 
 ## Licença
-This project is licensed under the MIT License.
+Distribuído sob a licença **MIT License**.
