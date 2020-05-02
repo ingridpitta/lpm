@@ -64,7 +64,7 @@ router.post(
       const { url } = req.file;
       const { id } = req.params;
       await User.findByIdAndUpdate(id, { image: url });
-      res.redirect("/auth/signup/goal");
+      res.redirect("/auth/signup/login-goal");
     } catch (error) {
       res.render("private/signup-step", {
         errorMessage:
@@ -74,6 +74,10 @@ router.post(
     }
   }
 );
+
+router.get("/signup/login-goal", (req, res) => {
+  res.redirect(307, "/auth/login");
+});
 
 router.get("/signup/goal", (req, res) => {
   res.render("private/goal");
@@ -87,7 +91,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/dashboard",
+    successRedirect: "/auth/signup/goal",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
