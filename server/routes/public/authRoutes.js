@@ -29,9 +29,11 @@ router.post("/signup", async (req, res) => {
       password: hashPassword,
       email
     });
+
     await newUser.save();
-    res.redirect(307, "/auth/login");
-    res.render("private/signup-step", { id: newUser._id });
+
+    await res.render("private/signup-step", { id: newUser._id });
+    await res.redirect(307, "/auth/login");
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
