@@ -11,34 +11,33 @@
 
             <div class="row">
 
-                <form action="" method="POST">
-                    {{#if objects}}
-                    <div class="col l12 m12 s12">
-                        <div class="row center-cols center-align">
-                            {{#each objects}}
-                            <div class="col l3 m4 s10">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../../images/dashboard/dark-map.png">
-                                    </div>
-                                    <div class="card-content">
-                                        <p>{{description}}</p>
-                                    </div>
-                                    <div class="card-action">
-                                        <a href="">Selecionar</a>
-                                    </div>
+                {{#if objects}}
+                <div class="col l12 m12 s12">
+                    <div class="row center-cols center-align">
+                        {{#each objects}}
+                        <div class="col l3 m4 s10">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../../images/dashboard/dark-map.png">
+                                </div>
+                                <div class="card-content">
+                                    <p>{{description}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a id={{this._id}} href="/dashboard">Selecionar</a>
                                 </div>
                             </div>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     </div>
-                    {{else}}
-                    <div>
-                        <h3>Nenhum objeto cadastrado.</h3>
-                        <a href="registerObject">Cadastrar Objeto</a>
-                    </div>
-                    {{/if}}
-                </form>
+                </div>
+                {{else}}
+                <div>
+                    <h3>Nenhum objeto cadastrado.</h3>
+                    <a href="registerObject">Cadastrar Objeto</a>
+                </div>
+                {{/if}}
+
             </div>
 
         </div>
@@ -46,5 +45,9 @@
 </div>
 
 <!--  Scripts-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../../js/moment.js"></script>
+<script src="../../js/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
+<script src="../../js/deal.js"></script>

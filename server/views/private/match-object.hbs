@@ -1,6 +1,7 @@
 <div>
     <a href="/dashboard" class="btn-close right"><i class="material-icons">close</i></a></li>
 </div>
+
 <div class="container auth">
     <div class="section">
         <div class="row center">
@@ -10,41 +11,40 @@
 
             <div class="row">
 
-                <form action="" method="POST">
-                    {{#if travels}}
-                    <div class="col l12 m12 s12">
-                        <div class="row center-cols center-align">
-                            {{#each travels}}
-                            <div class="col l4 m10 s10">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="../../images/dashboard/dark-map.png">
-                                        <div class="card-title">
-                                            <div class="card-subtitle">Partida em {{departure}}</div>
-                                            <div class="travel--origin">{{origin}}</div>
-                                            <div class="vl"></div>
-                                            <div class="card-subtitle">Chegada em {{arrival}}</div>
-                                            <div class="travel--destination">{{destination}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <p>{{description}}</p>
-                                    </div>
-                                    <div class="card-action">
-                                        <a href="">Selecionar</a>
+                {{#if travels}}
+                <div class="col l12 m12 s12">
+                    <div class="row center-cols center-align">
+                        {{#each travels}}
+                        <div class="col l4 m10 s10">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="../../images/dashboard/dark-map.png">
+                                    <div class="card-title">
+                                        <div class="card-subtitle">Partida em {{departure}}</div>
+                                        <div class="travel--origin">{{origin}}</div>
+                                        <div class="vl"></div>
+                                        <div class="card-subtitle">Chegada em {{arrival}}</div>
+                                        <div class="travel--destination">{{destination}}</div>
                                     </div>
                                 </div>
+                                <div class="card-content">
+                                    <p>{{description}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <a id={{this._id}} href="/dashboard">Selecionar</a>
+                                </div>
                             </div>
-                            {{/each}}
                         </div>
+                        {{/each}}
                     </div>
-                    {{else}}
-                    <div>
-                        <h5>Nenhuma viagem cadastrada.</h5>
-                        <a href="registerTravel">Vou Viajar</a>
-                    </div>
-                    {{/if}}
-                </form>
+                </div>
+                {{else}}
+                <div>
+                    <h5>Nenhuma viagem cadastrada.</h5>
+                    <a href="registerTravel">Vou Viajar</a>
+                </div>
+                {{/if}}
+
             </div>
 
         </div>
@@ -52,7 +52,9 @@
 </div>
 
 <!--  Scripts-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="../../js/moment.js"></script>
 <script src="../../js/moment-with-locales.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="../../js/materialize.js"></script>
+<script src="../../js/deal.js"></script>
