@@ -29,11 +29,9 @@ router.post("/signup", async (req, res) => {
       password: hashPassword,
       email
     });
-
     await newUser.save();
-
+    // res.redirect(307, '/auth/login');
     res.render("private/signup-step", { id: newUser._id });
-    // await res.redirect(307, "/auth/login");
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
@@ -66,7 +64,7 @@ router.post(
       const { url } = req.file;
       const { id } = req.params;
       await User.findByIdAndUpdate(id, { image: url });
-      res.redirect("/auth/signup/login-goal");
+      res.redirect("/auth/signup/goal");
     } catch (error) {
       res.render("private/signup-step", {
         errorMessage:
@@ -76,10 +74,6 @@ router.post(
     }
   }
 );
-
-router.get("/signup/login-goal", (req, res) => {
-  res.redirect(307, "/auth/login");
-});
 
 router.get("/signup/goal", (req, res) => {
   res.render("private/goal");
@@ -93,7 +87,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/auth/signup/goal",
+    successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
