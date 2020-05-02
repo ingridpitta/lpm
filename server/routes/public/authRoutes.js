@@ -30,8 +30,8 @@ router.post("/signup", async (req, res) => {
       email
     });
     await newUser.save();
+    // res.redirect(307, '/auth/login');
     res.render("private/signup-step", { id: newUser._id });
-    // res.redirect(307, "/auth/login");
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
@@ -64,9 +64,7 @@ router.post(
       const { url } = req.file;
       const { id } = req.params;
       await User.findByIdAndUpdate(id, { image: url });
-
-      res.redirect(307, "/auth/login");
-      // res.redirect("/auth/signup/goal");
+      res.redirect("/auth/signup/goal");
     } catch (error) {
       res.render("private/signup-step", {
         errorMessage:
@@ -89,7 +87,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/auth/signup/goal",
+    successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
@@ -103,7 +101,7 @@ router.get(
   "/facebook/callback",
   passport.authenticate("facebook", { failureRedirect: "/auth/login" }),
   (req, res) => {
-    res.redirect("/auth/signup/goal");
+    res.redirect("/dashboard");
   }
 );
 
