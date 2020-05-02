@@ -6,7 +6,7 @@
 
 
 # Leva Pra Mim - LPM 
-> Projeto de conclusão do módulo 2 (Backend) do curso de Web Development Full Stack da Ironhack.
+> Projeto de conclusão do módulo 2 do curso de Web Development Full Stack da Ironhack.
 
 **LevaPraMim** veio para revolucionar o mercado de entregas. Chega de pagar altas taxas para enviar alguma coisa para alguém pelo Brasil. Sempre existirá alguém indo para o lugar que você deseja enviar o que precisa, basta entrar no **LevaPraMim** e procurar a viagem desejada. Não achou a sua viagem? Cadastre o que você precisa levar e espere alguém entrar em contato com você. Vai viajar? Então ganhe dinheiro levando algo para alguém. 
 
