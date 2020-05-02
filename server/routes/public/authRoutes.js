@@ -31,6 +31,7 @@ router.post("/signup", async (req, res) => {
     });
     await newUser.save();
     res.render("private/signup-step", { id: newUser._id });
+    // res.redirect(307, "/auth/login");
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
@@ -65,7 +66,7 @@ router.post(
       await User.findByIdAndUpdate(id, { image: url });
 
       // res.redirect("/auth/signup/goal");
-      res.redirect(307, "/auth/login");
+      // res.redirect(307, "/auth/login");
     } catch (error) {
       res.render("private/signup-step", {
         errorMessage:
@@ -77,6 +78,7 @@ router.post(
 );
 
 router.get("/signup/goal", (req, res) => {
+  res.redirect(307, "/auth/login");
   res.render("private/goal");
 });
 
