@@ -3,7 +3,7 @@
 let all_tr;
 let all_obj;
 
-const BASE_URL = "https://levapramim-lpm.herokuapp.com";
+const BASE_URL = "http://localhost:3001";
 const api = axios.create({
   baseURL: BASE_URL
 });
@@ -83,17 +83,17 @@ const calculateDistance = async (org, destinations) => {
                 const format_departure = moment(departure).format("l");
                 const format_arrival = moment(arrival).format("l");
 
-                content_obj += `<div class="row center-cols center-align">
-                                <div class="col l3 m4 s10">
+                content_obj += `
+                                <div class="col l4 m12 s12 card-space">
                                   <div class="card">
                                     <div class="card-image">
                                       <img src="../../images/dashboard/dark-map.png">
                                       <div class="card-title">
                                         <div class="card-subtitle">Partida em ${format_departure}</div>
-                                        <div class="object--origin">${origin}</div>
+                                        <div class="travel--origin">${origin}</div>
                                         <div class="vl"></div>
                                         <div class="card-subtitle">Chegada em ${format_arrival}</div>
-                                        <div class="object--destination">${destination}</div>
+                                        <div class="travel--destination">${destination}</div>
                                       </div>
                                     </div>
                                     <div class="card-content">
@@ -109,8 +109,7 @@ const calculateDistance = async (org, destinations) => {
                                       <a href="deal/object/${_id}">Entre em contato</a>
                                     </div>
                                   </div>
-                                </div>
-                              </div>`;
+                                </div>`;
               });
             } else {
               content_obj += "<div><h2>Nenhum objeto cadastrado</h2></div>";
@@ -134,40 +133,39 @@ const calculateDistance = async (org, destinations) => {
                   departure,
                   arrival,
                   space,
-                  price
+                  price,
                 } = tr.data;
 
                 const format_departure = moment(departure).format("l");
                 const format_arrival = moment(arrival).format("l");
 
-                content_tr += `<div class="row center-cols center-align">
-                    <div class="col l3 m4 s10">
-                      <div class="card">
-                        <div class="card-image">
-                          <img src="../../images/dashboard/dark-map.png">
-                          <div class="card-title">
-                            <div class="card-subtitle">Partida em ${format_departure}</div>
-                            <div class="travel--origin">${origin}</div>
-                            <div class="vl"></div>
-                            <div class="card-subtitle">Chegada em ${format_arrival}</div>
-                            <div class="travel--destination">${destination}</div>
-                          </div>
-                        </div>
-                        <div class="card-content">
-                          <p>${description}</p>
-                        </div>
-                        <div class="card-content">
-                          <p>${space}</p>
-                        </div>
-                        <div class="card-content">
-                          <p>${price}</p>
-                        </div>
-                        <div class="card-action">
-                          <a href="deal/travel/${_id}">Entre em contato</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>`;
+                content_tr += `
+                            <div class="col l4 m12 s12 card-space">
+                              <div class="card">
+                                <div class="card-image">
+                                  <img src="../../images/dashboard/dark-map.png">
+                                  <div class="card-title">
+                                    <div class="card-subtitle">Partida em ${format_departure}</div>
+                                    <div class="travel--origin">${origin}</div>
+                                    <div class="vl"></div>
+                                    <div class="card-subtitle">Chegada em ${format_arrival}</div>
+                                    <div class="travel--destination">${destination}</div>
+                                  </div>
+                                </div>
+                                <div class="card-content">
+                                  <p>${description}</p>
+                                </div>
+                                <div class="card-content">
+                                  <p>${space}</p>
+                                </div>
+                                <div class="card-content">
+                                  <p>${price}</p>
+                                </div>
+                                <div class="card-action">
+                                  <a href="deal/travel/${_id}">Entre em contato</a>
+                                </div>
+                              </div>
+                            </div>`;
               });
             } else {
               content_tr += "<div><h2>Nenhuma viagem cadastrada</h2></div>";

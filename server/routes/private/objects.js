@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 });
 
 // For axios - find one object
-router.post("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {

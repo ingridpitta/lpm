@@ -105,4 +105,9 @@ router.get("/logout", (req, res) => {
   res.redirect("/auth/login");
 });
 
+router.get("/match/:_id", (req, res) => {
+  console.log(req.params._id);
+  res.render("private/match");
+});
+
 export default router;
