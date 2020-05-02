@@ -78,7 +78,6 @@ router.post(
 );
 
 router.get("/signup/goal", (req, res) => {
-  res.redirect(307, "/auth/login");
   res.render("private/goal");
 });
 
