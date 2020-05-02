@@ -26,7 +26,7 @@
                                         <p>{{description}}</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="">Selecionar</a>
+                                        <a href="match-success">Selecionar</a>
                                     </div>
                                 </div>
                             </div>
@@ -34,9 +34,12 @@
                         </div>
                     </div>
                     {{else}}
-                    <div>
-                        <h3>Nenhum objeto cadastrado.</h3>
-                    <a href="registerObject">Cadastrar Objeto</a>
+                    <div class="row center">
+                        <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                            <h5 class="red-text">Nenhuma objeto cadastrado.</h5>
+                            <br></br>
+                            <a href="../../registerObject" class="btn-large waves-effect waves-light">Cadastrar Objeto</a>
+                        </div>
                     </div>
                     {{/if}}
                 </form>

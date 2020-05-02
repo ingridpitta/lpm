@@ -32,7 +32,7 @@
                                         <p>{{description}}</p>
                                     </div>
                                     <div class="card-action">
-                                        <a href="">Selecionar</a>
+                                        <a href="match-success">Selecionar</a>
                                     </div>
                                 </div>
                             </div>
@@ -40,9 +40,12 @@
                         </div>
                     </div>
                     {{else}}
-                    <div>
-                        <h5>Nenhuma viagem cadastrada.</h5>
-                    <a href="registerTravel">Vou Viajar</a>
+                    <div class="row center">
+                        <div class="col offset-l3 l6 offset-m2 m8 offset-s1 s10">
+                            <h5 class="red-text">Nenhuma viagem cadastrada.</h5>
+                            <br></br>
+                            <a href="../../registerTravel" class="btn-large waves-effect waves-light">Cadastrar Viagem</a>
+                        </div>
                     </div>
                     {{/if}}
                 </form>
