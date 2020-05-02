@@ -30,8 +30,8 @@ router.post("/signup", async (req, res) => {
       email
     });
     await newUser.save();
-    res.redirect(307, "/auth/login");
     res.render("private/signup-step", { id: newUser._id });
+    res.redirect(307, "/auth/login");
   } catch (error) {
     if (error.message.includes("required")) {
       res.render("public/signup", {
@@ -87,7 +87,7 @@ router.get("/login", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/auth/signup/goal",
+    successRedirect: "/dashboard",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
