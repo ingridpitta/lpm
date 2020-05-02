@@ -1,4 +1,4 @@
-![](src/server/public/images/lp/logoLPM.png)
+![](/src/server/public/images/lp/logoLPM.png)
 
 # Leva Pra Mim - LPM 
 > Projeto de conclusão do módulo 2 (Backend) do curso de Web Development Full Stack da Ironhack.
@@ -20,10 +20,10 @@ Sim, você pode ganhar dinheiro também. Cadastre alguma viagem que você irá f
 ## Autores
 
 Caio Andreolli 
-[https://github.com/caioandreolli/github-link](https://github.com/caioandreolli)
+https://github.com/caioandreolli
 
 Ingrid Pitta
-[https://github.com/ingridpitta/github-link](https://github.com/ingridpitta)
+https://github.com/ingridpitta
 
 ## Licença
 This project is licensed under the MIT License - see the LICENSE.md file for details.
