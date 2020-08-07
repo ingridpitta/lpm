@@ -5,8 +5,10 @@ const router = express.Router();
 
 // For axios - list objects
 router.get("/", async (req, res) => {
+ const { user } = req;
+
   try {
-    const objects = await UserObject.find();
+    const objects = await UserObject.find({ user: user._id });
 
     res.status(200).json(objects);
   } catch (err) {
